@@ -7,6 +7,7 @@ import { useState } from "react";
 import BlogModal from "@/components/BlogModal";
 import AddBlogModal from "@/components/AddBlogModal";
 
+
 const Blog = () => {
   const [selectedPost, setSelectedPost] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
