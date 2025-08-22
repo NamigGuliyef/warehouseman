@@ -22,27 +22,28 @@ const Dashboard = () => {
     position: "Anbar Mütəxəssisi",
     email: "namiq@example.com",
     phone: "+994 50 123 45 67",
-    about: "Təcrübəli anbar mütəxəssisi və logistika uzmanı",
+    background: "Təcrübəli anbar mütəxəssisi və logistika uzmanı",
+    focus: "Müasir anbar idarəetməsi və logistika texnologiyaları",
     image: ""
   });
 
   // Jobs State
   const [jobs, setJobs] = useState([
-    { 
-      id: 1, 
-      company: "ABC Logistics", 
-      position: "Anbar Meneceri", 
+    {
+      id: 1,
+      company: "ABC Logistics",
+      position: "Anbar Meneceri",
       location: "Bakı",
-      period: "2020-2024", 
-      description: "Anbar əməliyyatlarının idarə edilməsi və komanda koordinasiyası. Inventar idarəetməsi və logistika proseslərinin optimallaşdırılması." 
+      period: "2020-2024",
+      description: "Anbar əməliyyatlarının idarə edilməsi və komanda koordinasiyası. Inventar idarəetməsi və logistika proseslərinin optimallaşdırılması."
     },
-    { 
-      id: 2, 
-      company: "XYZ Distribution", 
-      position: "Logistika Uzmanı", 
+    {
+      id: 2,
+      company: "XYZ Distribution",
+      position: "Logistika Uzmanı",
       location: "Sumqayıt",
-      period: "2018-2020", 
-      description: "Göndərmə və qəbul proseslərinin koordinasiyası. Nəqliyyat marşrutlarının planlaşdırılması və tədarükçü əlaqələrinin idarə edilməsi." 
+      period: "2018-2020",
+      description: "Göndərmə və qəbul proseslərinin koordinasiyası. Nəqliyyat marşrutlarının planlaşdırılması və tədarükçü əlaqələrinin idarə edilməsi."
     }
   ]);
 
@@ -67,29 +68,29 @@ const Dashboard = () => {
 
   // Vacancies State
   const [vacancies, setVacancies] = useState([
-    { 
-      id: 1, 
-      title: "Senior Anbar Mütəxəssisi", 
+    {
+      id: 1,
+      title: "Senior Anbar Mütəxəssisi",
       company: "Bravo Supermarket",
-      location: "Bakı", 
-      salary: "2000-3000 AZN", 
+      location: "Bakı",
+      salary: "2000-3000 AZN",
       deadline: "2024-07-15",
       description: "Anbar əməliyyatlarının həyata keçirilməsi və komanda rəhbərliyi",
       requirements: "5+ il təcrübə, WMS sistemi bilikləri, İngilis dili",
       link: "https://bravo.az/careers",
-      status: "Aktiv" 
+      status: "Aktiv"
     },
-    { 
-      id: 2, 
-      title: "Logistika Koordinatoru", 
+    {
+      id: 2,
+      title: "Logistika Koordinatoru",
       company: "ASCO Group",
-      location: "Sumqayıt", 
-      salary: "1500-2000 AZN", 
+      location: "Sumqayıt",
+      salary: "1500-2000 AZN",
       deadline: "2024-08-01",
       description: "Nəqliyyat planlaşdırması və tədarükçü əlaqələri",
       requirements: "Logistika sahəsində təcrübə, Sürücülük vəsiqəsi",
       link: "https://asco.az/careers",
-      status: "Qeyri-aktiv" 
+      status: "Qeyri-aktiv"
     }
   ]);
 
@@ -99,7 +100,7 @@ const Dashboard = () => {
   const [isCertDialogOpen, setIsCertDialogOpen] = useState(false);
   const [isBlogDialogOpen, setIsBlogDialogOpen] = useState(false);
   const [isVacancyDialogOpen, setIsVacancyDialogOpen] = useState(false);
-  
+
   // Edit states
   const [editingJob, setEditingJob] = useState(null);
   const [editingSkill, setEditingSkill] = useState(null);
@@ -112,9 +113,9 @@ const Dashboard = () => {
   const [skillForm, setSkillForm] = useState({ name: "", level: "", category: "" });
   const [certForm, setCertForm] = useState({ name: "", organization: "", date: "", image: "" });
   const [blogForm, setBlogForm] = useState({ title: "", category: "", content: "", image: "" });
-  const [vacancyForm, setVacancyForm] = useState({ 
-    title: "", company: "", location: "", salary: "", deadline: "", 
-    description: "", requirements: "", link: "", status: "Aktiv" 
+  const [vacancyForm, setVacancyForm] = useState({
+    title: "", company: "", location: "", salary: "", deadline: "",
+    description: "", requirements: "", link: "", status: "Aktiv"
   });
 
   // File upload simulation
@@ -250,10 +251,10 @@ const Dashboard = () => {
 
   const handleEditVacancy = (vacancy) => {
     setEditingVacancy(vacancy);
-    setVacancyForm({ 
-      title: vacancy.title, company: vacancy.company, location: vacancy.location, 
-      salary: vacancy.salary, deadline: vacancy.deadline, description: vacancy.description, 
-      requirements: vacancy.requirements, link: vacancy.link, status: vacancy.status 
+    setVacancyForm({
+      title: vacancy.title, company: vacancy.company, location: vacancy.location,
+      salary: vacancy.salary, deadline: vacancy.deadline, description: vacancy.description,
+      requirements: vacancy.requirements, link: vacancy.link, status: vacancy.status
     });
     setIsVacancyDialogOpen(true);
   };
@@ -329,7 +330,7 @@ const Dashboard = () => {
                   <Input
                     id="name"
                     value={profile.name}
-                    onChange={(e) => setProfile({...profile, name: e.target.value})}
+                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
                   />
                 </div>
                 <div>
@@ -337,7 +338,7 @@ const Dashboard = () => {
                   <Input
                     id="position"
                     value={profile.position}
-                    onChange={(e) => setProfile({...profile, position: e.target.value})}
+                    onChange={(e) => setProfile({ ...profile, position: e.target.value })}
                   />
                 </div>
                 <div>
@@ -346,7 +347,7 @@ const Dashboard = () => {
                     id="email"
                     type="email"
                     value={profile.email}
-                    onChange={(e) => setProfile({...profile, email: e.target.value})}
+                    onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                   />
                 </div>
                 <div>
@@ -354,19 +355,35 @@ const Dashboard = () => {
                   <Input
                     id="phone"
                     value={profile.phone}
-                    onChange={(e) => setProfile({...profile, phone: e.target.value})}
+                    onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                  />
+                </div>
+                {/* Professional Background */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="background">Professional Background</Label>
+                  <Textarea
+                    id="background"
+                    value={profile.background}
+                    onChange={(e) =>
+                      setProfile({ ...profile, background: e.target.value })
+                    }
+                    rows={3}
+                  />
+                </div>
+                {/* Texnoloji Fokus */}
+                <div className="md:col-span-2">
+                  <Label htmlFor="focus">Texnoloji Fokus</Label>
+                  <Textarea
+                    id="focus"
+                    value={profile.focus}
+                    onChange={(e) =>
+                      setProfile({ ...profile, focus: e.target.value })
+                    }
+                    rows={3}
                   />
                 </div>
               </div>
-              <div>
-                <Label htmlFor="about">Haqqımda</Label>
-                <Textarea
-                  id="about"
-                  value={profile.about}
-                  onChange={(e) => setProfile({...profile, about: e.target.value})}
-                  rows={4}
-                />
-              </div>
+
               <Button onClick={() => handleSave("Profil")} className="w-full md:w-auto">
                 Yadda saxla
               </Button>
@@ -400,45 +417,45 @@ const Dashboard = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="company">Şirkət Adı</Label>
-                        <Input 
-                          id="company" 
+                        <Input
+                          id="company"
                           value={jobForm.company}
-                          onChange={(e) => setJobForm({...jobForm, company: e.target.value})}
+                          onChange={(e) => setJobForm({ ...jobForm, company: e.target.value })}
                         />
                       </div>
                       <div>
                         <Label htmlFor="job-position">Vəzifə</Label>
-                        <Input 
-                          id="job-position" 
+                        <Input
+                          id="job-position"
                           value={jobForm.position}
-                          onChange={(e) => setJobForm({...jobForm, position: e.target.value})}
+                          onChange={(e) => setJobForm({ ...jobForm, position: e.target.value })}
                         />
                       </div>
                       <div>
                         <Label htmlFor="location">Yer</Label>
-                        <Input 
-                          id="location" 
+                        <Input
+                          id="location"
                           value={jobForm.location}
-                          onChange={(e) => setJobForm({...jobForm, location: e.target.value})}
+                          onChange={(e) => setJobForm({ ...jobForm, location: e.target.value })}
                           placeholder="Məs: Bakı, Sumqayıt"
                         />
                       </div>
                       <div>
                         <Label htmlFor="period">İş Müddəti</Label>
-                        <Input 
-                          id="period" 
+                        <Input
+                          id="period"
                           value={jobForm.period}
-                          onChange={(e) => setJobForm({...jobForm, period: e.target.value})}
-                          placeholder="2020-2024" 
+                          onChange={(e) => setJobForm({ ...jobForm, period: e.target.value })}
+                          placeholder="2020-2024"
                         />
                       </div>
                     </div>
                     <div>
                       <Label htmlFor="job-description">Ətraflı (İş Təsviri)</Label>
-                      <Textarea 
-                        id="job-description" 
+                      <Textarea
+                        id="job-description"
                         value={jobForm.description}
-                        onChange={(e) => setJobForm({...jobForm, description: e.target.value})}
+                        onChange={(e) => setJobForm({ ...jobForm, description: e.target.value })}
                         rows={4}
                         placeholder="Şirkətdə görülən işlər haqqında ətraflı məlumat"
                       />
@@ -517,27 +534,27 @@ const Dashboard = () => {
                   <div className="space-y-4">
                     <div>
                       <Label htmlFor="skill-name">Bacarıq Adı</Label>
-                      <Input 
-                        id="skill-name" 
+                      <Input
+                        id="skill-name"
                         value={skillForm.name}
-                        onChange={(e) => setSkillForm({...skillForm, name: e.target.value})}
+                        onChange={(e) => setSkillForm({ ...skillForm, name: e.target.value })}
                       />
                     </div>
                     <div>
                       <Label htmlFor="skill-level">Səviyyə</Label>
-                      <Input 
-                        id="skill-level" 
+                      <Input
+                        id="skill-level"
                         value={skillForm.level}
-                        onChange={(e) => setSkillForm({...skillForm, level: e.target.value})}
-                        placeholder="Başlanğıc/Orta/Təcrübəli" 
+                        onChange={(e) => setSkillForm({ ...skillForm, level: e.target.value })}
+                        placeholder="Başlanğıc/Orta/Təcrübəli"
                       />
                     </div>
                     <div>
                       <Label htmlFor="skill-category">Kateqoriya</Label>
-                      <Input 
-                        id="skill-category" 
+                      <Input
+                        id="skill-category"
                         value={skillForm.category}
-                        onChange={(e) => setSkillForm({...skillForm, category: e.target.value})}
+                        onChange={(e) => setSkillForm({ ...skillForm, category: e.target.value })}
                       />
                     </div>
                     <Button className="w-full" onClick={handleAddSkill}>
@@ -598,34 +615,34 @@ const Dashboard = () => {
                   <div className="space-y-4">
                     <div>
                       <Label htmlFor="cert-name">Sertifikat Adı</Label>
-                      <Input 
-                        id="cert-name" 
+                      <Input
+                        id="cert-name"
                         value={certForm.name}
-                        onChange={(e) => setCertForm({...certForm, name: e.target.value})}
+                        onChange={(e) => setCertForm({ ...certForm, name: e.target.value })}
                       />
                     </div>
                     <div>
                       <Label htmlFor="cert-org">Təşkilat</Label>
-                      <Input 
-                        id="cert-org" 
+                      <Input
+                        id="cert-org"
                         value={certForm.organization}
-                        onChange={(e) => setCertForm({...certForm, organization: e.target.value})}
+                        onChange={(e) => setCertForm({ ...certForm, organization: e.target.value })}
                       />
                     </div>
                     <div>
                       <Label htmlFor="cert-date">Tarix</Label>
-                      <Input 
-                        id="cert-date" 
+                      <Input
+                        id="cert-date"
                         value={certForm.date}
-                        onChange={(e) => setCertForm({...certForm, date: e.target.value})}
+                        onChange={(e) => setCertForm({ ...certForm, date: e.target.value })}
                         placeholder="2023"
                       />
                     </div>
                     <div>
                       <Label htmlFor="cert-image">Sertifikat Şəkli</Label>
                       <div className="flex items-center gap-4">
-                        <Input 
-                          id="cert-image" 
+                        <Input
+                          id="cert-image"
                           type="file"
                           accept="image/*"
                           onChange={(e) => handleFileUpload(e, setCertForm, 'image')}
@@ -636,11 +653,11 @@ const Dashboard = () => {
                       {certForm.image && (
                         <div className="mt-2 relative">
                           <img src={certForm.image} alt="Preview" className="w-20 h-20 object-cover rounded" />
-                          <Button 
-                            size="sm" 
-                            variant="outline" 
+                          <Button
+                            size="sm"
+                            variant="outline"
                             className="absolute -top-2 -right-2 h-6 w-6 p-0"
-                            onClick={() => setCertForm({...certForm, image: ""})}
+                            onClick={() => setCertForm({ ...certForm, image: "" })}
                           >
                             <X className="h-3 w-3" />
                           </Button>
@@ -721,34 +738,34 @@ const Dashboard = () => {
                   <div className="space-y-4">
                     <div>
                       <Label htmlFor="blog-title">Başlıq</Label>
-                      <Input 
-                        id="blog-title" 
+                      <Input
+                        id="blog-title"
                         value={blogForm.title}
-                        onChange={(e) => setBlogForm({...blogForm, title: e.target.value})}
+                        onChange={(e) => setBlogForm({ ...blogForm, title: e.target.value })}
                       />
                     </div>
                     <div>
                       <Label htmlFor="blog-category">Kateqoriya</Label>
-                      <Input 
-                        id="blog-category" 
+                      <Input
+                        id="blog-category"
                         value={blogForm.category}
-                        onChange={(e) => setBlogForm({...blogForm, category: e.target.value})}
+                        onChange={(e) => setBlogForm({ ...blogForm, category: e.target.value })}
                       />
                     </div>
                     <div>
                       <Label htmlFor="blog-content">Məzmun</Label>
-                      <Textarea 
-                        id="blog-content" 
+                      <Textarea
+                        id="blog-content"
                         value={blogForm.content}
-                        onChange={(e) => setBlogForm({...blogForm, content: e.target.value})}
+                        onChange={(e) => setBlogForm({ ...blogForm, content: e.target.value })}
                         rows={6}
                       />
                     </div>
                     <div>
                       <Label htmlFor="blog-image">Bloq Şəkli</Label>
                       <div className="flex items-center gap-4">
-                        <Input 
-                          id="blog-image" 
+                        <Input
+                          id="blog-image"
                           type="file"
                           accept="image/*"
                           onChange={(e) => handleFileUpload(e, setBlogForm, 'image')}
@@ -759,11 +776,11 @@ const Dashboard = () => {
                       {blogForm.image && (
                         <div className="mt-2 relative">
                           <img src={blogForm.image} alt="Preview" className="w-20 h-20 object-cover rounded" />
-                          <Button 
-                            size="sm" 
-                            variant="outline" 
+                          <Button
+                            size="sm"
+                            variant="outline"
                             className="absolute -top-2 -right-2 h-6 w-6 p-0"
-                            onClick={() => setBlogForm({...blogForm, image: ""})}
+                            onClick={() => setBlogForm({ ...blogForm, image: "" })}
                           >
                             <X className="h-3 w-3" />
                           </Button>
@@ -835,98 +852,169 @@ const Dashboard = () => {
               </CardTitle>
               <Dialog open={isVacancyDialogOpen} onOpenChange={setIsVacancyDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button onClick={() => {
-                    setEditingVacancy(null);
-                    setVacancyForm({ title: "", company: "", location: "", salary: "", deadline: "", description: "", requirements: "", link: "", status: "Aktiv" });
-                  }}>
+                  <Button
+                    onClick={() => {
+                      setEditingVacancy(null);
+                      setVacancyForm({
+                        title: "",
+                        company: "",
+                        location: "",
+                        salary: "",
+                        deadline: "",
+                        description: "",
+                        requirements: "",
+                        link: "",
+                        status: "Aktiv",
+                        schedule: "Tam ştat", // default
+                        priority: "Adi", // default
+                      });
+                    }}
+                  >
                     <Plus className="w-4 h-4 mr-2" />
                     Yeni Vakansiya Əlavə Et
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                   <DialogHeader>
-                    <DialogTitle>{editingVacancy ? "Vakansiyanı Redaktə Et" : "Yeni Vakansiya"}</DialogTitle>
+                    <DialogTitle>
+                      {editingVacancy ? "Vakansiyanı Redaktə Et" : "Yeni Vakansiya"}
+                    </DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="vacancy-title">Vəzifə</Label>
-                        <Input 
-                          id="vacancy-title" 
+                        <Input
+                          id="vacancy-title"
                           value={vacancyForm.title}
-                          onChange={(e) => setVacancyForm({...vacancyForm, title: e.target.value})}
+                          onChange={(e) =>
+                            setVacancyForm({ ...vacancyForm, title: e.target.value })
+                          }
                         />
                       </div>
                       <div>
                         <Label htmlFor="vacancy-company">Şirkət</Label>
-                        <Input 
-                          id="vacancy-company" 
+                        <Input
+                          id="vacancy-company"
                           value={vacancyForm.company}
-                          onChange={(e) => setVacancyForm({...vacancyForm, company: e.target.value})}
+                          onChange={(e) =>
+                            setVacancyForm({ ...vacancyForm, company: e.target.value })
+                          }
                         />
                       </div>
                       <div>
                         <Label htmlFor="vacancy-location">Yer</Label>
-                        <Input 
-                          id="vacancy-location" 
+                        <Input
+                          id="vacancy-location"
                           value={vacancyForm.location}
-                          onChange={(e) => setVacancyForm({...vacancyForm, location: e.target.value})}
+                          onChange={(e) =>
+                            setVacancyForm({ ...vacancyForm, location: e.target.value })
+                          }
                         />
                       </div>
                       <div>
                         <Label htmlFor="vacancy-salary">Maaş</Label>
-                        <Input 
-                          id="vacancy-salary" 
+                        <Input
+                          id="vacancy-salary"
                           value={vacancyForm.salary}
-                          onChange={(e) => setVacancyForm({...vacancyForm, salary: e.target.value})}
+                          onChange={(e) =>
+                            setVacancyForm({ ...vacancyForm, salary: e.target.value })
+                          }
                         />
                       </div>
                       <div>
                         <Label htmlFor="vacancy-deadline">Son Tarix</Label>
-                        <Input 
-                          id="vacancy-deadline" 
+                        <Input
+                          id="vacancy-deadline"
                           type="date"
                           value={vacancyForm.deadline}
-                          onChange={(e) => setVacancyForm({...vacancyForm, deadline: e.target.value})}
+                          onChange={(e) =>
+                            setVacancyForm({ ...vacancyForm, deadline: e.target.value })
+                          }
                         />
                       </div>
                       <div>
                         <Label htmlFor="vacancy-link">Link</Label>
-                        <Input 
-                          id="vacancy-link" 
+                        <Input
+                          id="vacancy-link"
                           value={vacancyForm.link}
-                          onChange={(e) => setVacancyForm({...vacancyForm, link: e.target.value})}
+                          onChange={(e) =>
+                            setVacancyForm({ ...vacancyForm, link: e.target.value })
+                          }
                         />
+                      </div>
+                      {/* İş Qrafiki */}
+                      <div>
+                        <Label htmlFor="vacancy-schedule">İş qrafiki</Label>
+                        <select
+                          id="vacancy-schedule"
+                          value={vacancyForm.schedule}
+                          onChange={(e) =>
+                            setVacancyForm({ ...vacancyForm, schedule: e.target.value })
+                          }
+                          className="w-full p-2 border rounded"
+                        >
+                          <option value="Tam ştat">Tam ştat</option>
+                          <option value="Yarım ştat">Yarım ştat</option>
+                          <option value="Sərbəst">Sərbəst</option>
+                        </select>
+                      </div>
+                      {/* Prioritet */}
+                      <div>
+                        <Label htmlFor="vacancy-priority">Prioritet</Label>
+                        <select
+                          id="vacancy-priority"
+                          value={vacancyForm.priority}
+                          onChange={(e) =>
+                            setVacancyForm({ ...vacancyForm, priority: e.target.value })
+                          }
+                          className="w-full p-2 border rounded"
+                        >
+                          <option value="Adi">Adi</option>
+                          <option value="Təcili">Təcili</option>
+                        </select>
                       </div>
                     </div>
                     <div>
                       <Label htmlFor="vacancy-description">İş Təsviri</Label>
-                      <Textarea 
-                        id="vacancy-description" 
+                      <Textarea
+                        id="vacancy-description"
                         value={vacancyForm.description}
-                        onChange={(e) => setVacancyForm({...vacancyForm, description: e.target.value})}
+                        onChange={(e) =>
+                          setVacancyForm({
+                            ...vacancyForm,
+                            description: e.target.value,
+                          })
+                        }
                         rows={2}
                       />
                     </div>
                     <div>
                       <Label htmlFor="vacancy-requirements">Tələblər</Label>
-                      <Textarea 
-                        id="vacancy-requirements" 
+                      <Textarea
+                        id="vacancy-requirements"
                         value={vacancyForm.requirements}
-                        onChange={(e) => setVacancyForm({...vacancyForm, requirements: e.target.value})}
+                        onChange={(e) =>
+                          setVacancyForm({
+                            ...vacancyForm,
+                            requirements: e.target.value,
+                          })
+                        }
                         rows={2}
                       />
                     </div>
                     <div>
                       <Label htmlFor="vacancy-status">Status</Label>
-                      <select 
+                      <select
                         id="vacancy-status"
                         value={vacancyForm.status}
-                        onChange={(e) => setVacancyForm({...vacancyForm, status: e.target.value})}
+                        onChange={(e) =>
+                          setVacancyForm({ ...vacancyForm, status: e.target.value })
+                        }
                         className="w-full p-2 border rounded"
                       >
                         <option value="Aktiv">Aktiv</option>
-                        <option value="Qeyri-aktiv">Qeyri-aktiv</option>
+                        <option value="Vaxtı bitib">Vaxtı bitib</option>
                       </select>
                     </div>
                     <Button className="w-full" onClick={handleAddVacancy}>
@@ -944,6 +1032,8 @@ const Dashboard = () => {
                     <TableHead>Şirkət</TableHead>
                     <TableHead>Yer</TableHead>
                     <TableHead>Maaş</TableHead>
+                    <TableHead>İş qrafiki</TableHead>
+                    <TableHead>Prioritet</TableHead>
                     <TableHead>Son Tarix</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Əməliyyatlar</TableHead>
@@ -956,18 +1046,32 @@ const Dashboard = () => {
                       <TableCell>{vacancy.company}</TableCell>
                       <TableCell>{vacancy.location}</TableCell>
                       <TableCell>{vacancy.salary}</TableCell>
+                      <TableCell>{vacancy.schedule}</TableCell>
+                      <TableCell>{vacancy.priority}</TableCell>
                       <TableCell>{vacancy.deadline}</TableCell>
                       <TableCell>
-                        <Badge variant={vacancy.status === "Aktiv" ? "default" : "secondary"}>
+                        <Badge
+                          variant={
+                            vacancy.status === "Aktiv" ? "default" : "secondary"
+                          }
+                        >
                           {vacancy.status}
                         </Badge>
                       </TableCell>
                       <TableCell>
                         <div className="flex gap-2">
-                          <Button variant="outline" size="sm" onClick={() => handleEditVacancy(vacancy)}>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleEditVacancy(vacancy)}
+                          >
                             <Edit2 className="w-4 h-4" />
                           </Button>
-                          <Button variant="outline" size="sm" onClick={() => handleDeleteVacancy(vacancy.id)}>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleDeleteVacancy(vacancy.id)}
+                          >
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </div>
@@ -979,6 +1083,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </TabsContent>
+
       </Tabs>
     </div>
   );

@@ -786,7 +786,6 @@ const WarehouseAnimation = () => {
           <p>• 1. Mərhələ: 6 paket rəfə yerləşdirilir</p>
           <p>• 2. Mərhələ: Sifariş üzrə 2 paket götürülür</p>
           <p>• 3. Mərhələ: Paketlər göndəriş üçün hazırlanır</p>
-          <p>• FIFO qaydası: İlk gələn, ilk işlənir</p>
           <p>• Proses davamlı təkrarlanır</p>
         </div>
       </div>
