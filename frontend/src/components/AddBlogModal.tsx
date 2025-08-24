@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -15,7 +14,9 @@ const AddBlogModal = () => {
     title: "",
     category: "",
     content: "",
-    image: ""
+    image: "",
+    readTime: "",
+    author: ""
   });
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,14 +42,14 @@ const AddBlogModal = () => {
 
     // In a real app, this would send to backend
     console.log("New blog post:", blogForm);
-    
+
     toast({
       title: "Uğurlu!",
       description: "Blog yazınız uğurla yaradıldı və nəzərdən keçirilmək üçün göndərildi"
     });
 
     // Reset form and close modal
-    setBlogForm({ title: "", category: "", content: "", image: "" });
+    setBlogForm({ title: "", category: "", content: "", image: "", readTime: "", author: "" });
     setIsOpen(false);
   };
 
@@ -66,38 +67,56 @@ const AddBlogModal = () => {
         </DialogHeader>
         <div className="space-y-4">
           <div>
+            <Label htmlFor="blog-author">Müəllif</Label>
+            <Input
+              id="blog-author"
+              value={blogForm.author}
+              onChange={(e) => setBlogForm({ ...blogForm, author: e.target.value })}
+              placeholder="Müəllifin adı"
+            />
+          </div>
+          <div>
             <Label htmlFor="blog-title">Başlıq *</Label>
-            <Input 
-              id="blog-title" 
+            <Input
+              id="blog-title"
               value={blogForm.title}
-              onChange={(e) => setBlogForm({...blogForm, title: e.target.value})}
+              onChange={(e) => setBlogForm({ ...blogForm, title: e.target.value })}
               placeholder="Bloq yazısının başlığı"
             />
           </div>
           <div>
             <Label htmlFor="blog-category">Kateqoriya</Label>
-            <Input 
-              id="blog-category" 
+            <Input
+              id="blog-category"
               value={blogForm.category}
-              onChange={(e) => setBlogForm({...blogForm, category: e.target.value})}
+              onChange={(e) => setBlogForm({ ...blogForm, category: e.target.value })}
               placeholder="Məsələn: Texnologiya, Anbar İdarəetməsi"
             />
           </div>
           <div>
             <Label htmlFor="blog-content">Məzmun *</Label>
-            <Textarea 
-              id="blog-content" 
+            <Textarea
+              id="blog-content"
               value={blogForm.content}
-              onChange={(e) => setBlogForm({...blogForm, content: e.target.value})}
+              onChange={(e) => setBlogForm({ ...blogForm, content: e.target.value })}
               rows={8}
               placeholder="Blog yazısının məzmunu..."
             />
           </div>
           <div>
+            <Label htmlFor="blog-readTime">Oxuma müddəti</Label>
+            <Input
+              id="blog-readTime"
+              value={blogForm.readTime}
+              onChange={(e) => setBlogForm({ ...blogForm, readTime: e.target.value })}
+              placeholder="Məsələn: 5 dəq"
+            />
+          </div>
+          <div>
             <Label htmlFor="blog-image">Blog Şəkli</Label>
             <div className="flex items-center gap-4">
-              <Input 
-                id="blog-image" 
+              <Input
+                id="blog-image"
                 type="file"
                 accept="image/*"
                 onChange={handleFileUpload}
@@ -108,11 +127,11 @@ const AddBlogModal = () => {
             {blogForm.image && (
               <div className="mt-2 relative">
                 <img src={blogForm.image} alt="Preview" className="w-24 h-24 object-cover rounded" />
-                <Button 
-                  size="sm" 
-                  variant="outline" 
+                <Button
+                  size="sm"
+                  variant="outline"
                   className="absolute -top-2 -right-2 h-6 w-6 p-0"
-                  onClick={() => setBlogForm({...blogForm, image: ""})}
+                  onClick={() => setBlogForm({ ...blogForm, image: "" })}
                 >
                   <X className="h-3 w-3" />
                 </Button>

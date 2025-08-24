@@ -11,6 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Plus, Edit2, Trash2, User, Briefcase, Award, BookOpen, Users, FileText, Upload, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { read } from "fs";
 
 const Dashboard = () => {
   const { toast } = useToast();
@@ -78,7 +79,9 @@ const Dashboard = () => {
       description: "Anbar əməliyyatlarının həyata keçirilməsi və komanda rəhbərliyi",
       requirements: "5+ il təcrübə, WMS sistemi bilikləri, İngilis dili",
       link: "https://bravo.az/careers",
-      status: "Aktiv"
+      status: "Aktiv",
+      schedule: "Tam ştat",
+      priority: "Adi"
     },
     {
       id: 2,
@@ -112,10 +115,10 @@ const Dashboard = () => {
   const [jobForm, setJobForm] = useState({ company: "", position: "", location: "", period: "", description: "" });
   const [skillForm, setSkillForm] = useState({ name: "", level: "", category: "" });
   const [certForm, setCertForm] = useState({ name: "", organization: "", date: "", image: "" });
-  const [blogForm, setBlogForm] = useState({ title: "", category: "", content: "", image: "" });
+  const [blogForm, setBlogForm] = useState({ title: "", category: "", content: "", image: "", readTime: "", author: "" });
   const [vacancyForm, setVacancyForm] = useState({
     title: "", company: "", location: "", salary: "", deadline: "",
-    description: "", requirements: "", link: "", status: "Aktiv"
+    description: "", requirements: "", link: "", status: "Aktiv", schedule: "Tam ştat", priority: "Adi"
   });
 
   // File upload simulation
@@ -219,13 +222,13 @@ const Dashboard = () => {
       setBlogs([...blogs, newBlog]);
       toast({ title: "Yeni blog yazısı yaradıldı" });
     }
-    setBlogForm({ title: "", category: "", content: "", image: "" });
+    setBlogForm({ title: "", category: "", content: "", image: "", readTime: "", author: "" });
     setIsBlogDialogOpen(false);
   };
 
   const handleEditBlog = (blog) => {
     setEditingBlog(blog);
-    setBlogForm({ title: blog.title, category: blog.category, content: blog.content, image: blog.image });
+    setBlogForm({ title: blog.title, category: blog.category, content: blog.content, image: blog.image, readTime: blog.readTime, author: blog.author });
     setIsBlogDialogOpen(true);
   };
 
@@ -245,7 +248,7 @@ const Dashboard = () => {
       setVacancies([...vacancies, newVacancy]);
       toast({ title: "Yeni vakansiya əlavə edildi" });
     }
-    setVacancyForm({ title: "", company: "", location: "", salary: "", deadline: "", description: "", requirements: "", link: "", status: "Aktiv" });
+    setVacancyForm({ title: "", company: "", location: "", salary: "", deadline: "", description: "", requirements: "", link: "", status: "Aktiv", schedule: "Tam ştat", priority: "Adi" });
     setIsVacancyDialogOpen(false);
   };
 
@@ -254,7 +257,7 @@ const Dashboard = () => {
     setVacancyForm({
       title: vacancy.title, company: vacancy.company, location: vacancy.location,
       salary: vacancy.salary, deadline: vacancy.deadline, description: vacancy.description,
-      requirements: vacancy.requirements, link: vacancy.link, status: vacancy.status
+      requirements: vacancy.requirements, link: vacancy.link, status: vacancy.status, schedule: vacancy.schedule, priority: vacancy.priority
     });
     setIsVacancyDialogOpen(true);
   };
@@ -721,11 +724,12 @@ const Dashboard = () => {
                 <BookOpen className="w-5 h-5" />
                 Blog İdarəetməsi
               </CardTitle>
+
               <Dialog open={isBlogDialogOpen} onOpenChange={setIsBlogDialogOpen}>
                 <DialogTrigger asChild>
                   <Button onClick={() => {
                     setEditingBlog(null);
-                    setBlogForm({ title: "", category: "", content: "", image: "" });
+                    setBlogForm({ title: "", category: "", content: "", image: "", readTime: "", author: "" });
                   }}>
                     <Plus className="w-4 h-4 mr-2" />
                     Yeni Yazı Yarat
@@ -736,6 +740,15 @@ const Dashboard = () => {
                     <DialogTitle>{editingBlog ? "Blog Yazısını Redaktə Et" : "Yeni Blog Yazısı"}</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4">
+                    <div>
+                      <Label htmlFor="blog-author">Müəllif</Label>
+                      <Input
+                        id="blog-author"
+                        value={blogForm.author || ""}
+                        onChange={(e) => setBlogForm({ ...blogForm, author: e.target.value })}
+                        placeholder="Müəllifin adı"
+                      />
+                    </div>
                     <div>
                       <Label htmlFor="blog-title">Başlıq</Label>
                       <Input
@@ -759,6 +772,15 @@ const Dashboard = () => {
                         value={blogForm.content}
                         onChange={(e) => setBlogForm({ ...blogForm, content: e.target.value })}
                         rows={6}
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="blog-readTime">Oxuma müddəti</Label>
+                      <Input
+                        id="blog-readTime"
+                        value={blogForm.readTime || ""}
+                        onChange={(e) => setBlogForm({ ...blogForm, readTime: e.target.value })}
+                        placeholder="Məsələn: 5 dəq"
                       />
                     </div>
                     <div>
