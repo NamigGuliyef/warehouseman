@@ -4,24 +4,62 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { User } from "lucide-react";
+import { useState } from "react";
 
 interface ProfileData {
-  name: string;
+  fullName: string;
   position: string;
   email: string;
   phone: string;
-  background: string;
-  focus: string;
-  image: string;
+  profBackground: string;
+  technologyFocus: string;
+  experienceYears?: string;
+  managedProducts?: string;
+  solvedLogistics?: string;
+  efficiencyRate?: string;
 }
 
 interface ProfileSectionProps {
   profile: ProfileData;
   setProfile: (profile: ProfileData) => void;
-  handleSave: (section: string) => void;
 }
 
-const ProfileSection = ({ profile, setProfile, handleSave }: ProfileSectionProps) => {
+const ProfileSection = ({ profile, setProfile }: ProfileSectionProps) => {
+  const [loading, setLoading] = useState(false);
+
+  // Yeni anbardar profili yaratmaq üçün API bağlantısı
+  const handleCreateProfile = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:3000/portfolio/dashboard/warehouseman", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fullName: profile.fullName,
+          email: profile.email,
+          phone: profile.phone,
+          position: profile.position,
+          profBackground: profile.profBackground,
+          technologyFocus: profile.technologyFocus,
+          experienceYears: profile.experienceYears,
+          managedProducts: profile.managedProducts,
+          solvedLogistics: profile.solvedLogistics,
+          efficiencyRate: profile.efficiencyRate
+        })
+      });
+      if (response.ok) {
+        alert("Profil uğurla yaradıldı!");
+      } else {
+        alert("Xəta baş verdi!");
+      }
+    } catch (error) {
+      alert("Serverə qoşulmaq mümkün olmadı!");
+    }
+    setLoading(false);
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -33,11 +71,11 @@ const ProfileSection = ({ profile, setProfile, handleSave }: ProfileSectionProps
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="name">Ad və Soyad</Label>
+            <Label htmlFor="fullName">Ad və Soyad</Label>
             <Input
-              id="name"
-              value={profile.name}
-              onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+              id="fullName"
+              value={profile.fullName}
+              onChange={(e) => setProfile({ ...profile, fullName: e.target.value })}
             />
           </div>
           <div>
@@ -65,32 +103,63 @@ const ProfileSection = ({ profile, setProfile, handleSave }: ProfileSectionProps
               onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
             />
           </div>
+          <div>
+            <Label htmlFor="experienceYears">Təcrübə (il)</Label>
+            <Input
+              id="experienceYears"
+              value={profile.experienceYears || ""}
+              onChange={(e) => setProfile({ ...profile, experienceYears: e.target.value })}
+            />
+          </div>
+          <div>
+            <Label htmlFor="managedProducts">İdarə olunan məhsul</Label>
+            <Input
+              id="managedProducts"
+              value={profile.managedProducts || ""}
+              onChange={(e) => setProfile({ ...profile, managedProducts: e.target.value })}
+            />
+          </div>
+          <div>
+            <Label htmlFor="solvedLogistics">Həll edilmiş logistik məsələ</Label>
+            <Input
+              id="solvedLogistics"
+              value={profile.solvedLogistics || ""}
+              onChange={(e) => setProfile({ ...profile, solvedLogistics: e.target.value })}
+            />
+          </div>
+          <div>
+            <Label htmlFor="efficiencyRate">Effektivlik dərəcəsi</Label>
+            <Input
+              id="efficiencyRate"
+              value={profile.efficiencyRate || ""}
+              onChange={(e) => setProfile({ ...profile, efficiencyRate: e.target.value })}
+            />
+          </div>
           <div className="md:col-span-2">
-            <Label htmlFor="background">Professional Background</Label>
+            <Label htmlFor="profBackground">Professional Background</Label>
             <Textarea
-              id="background"
-              value={profile.background}
+              id="profBackground"
+              value={profile.profBackground}
               onChange={(e) =>
-                setProfile({ ...profile, background: e.target.value })
+                setProfile({ ...profile, profBackground: e.target.value })
               }
               rows={3}
             />
           </div>
           <div className="md:col-span-2">
-            <Label htmlFor="focus">Texnoloji Fokus</Label>
+            <Label htmlFor="technologyFocus">Texnoloji Fokus</Label>
             <Textarea
-              id="focus"
-              value={profile.focus}
+              id="technologyFocus"
+              value={profile.technologyFocus}
               onChange={(e) =>
-                setProfile({ ...profile, focus: e.target.value })
+                setProfile({ ...profile, technologyFocus: e.target.value })
               }
               rows={3}
             />
           </div>
         </div>
-
-        <Button onClick={() => handleSave("Profil")} className="w-full md:w-auto">
-          Yadda saxla
+        <Button onClick={handleCreateProfile} className="w-full md:w-auto" disabled={loading}>
+          {loading ? "Yüklənir..." : "Yeni profil yarat"}
         </Button>
       </CardContent>
     </Card>

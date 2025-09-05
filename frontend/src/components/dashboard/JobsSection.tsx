@@ -1,14 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Table, TableBody, TableCell, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Plus, Edit2, Trash2, Briefcase } from "lucide-react";
+import { Briefcase, Plus } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface Job {
-  id: number;
+  id?: string;
   company: string;
   position: string;
   location: string;
@@ -24,32 +25,59 @@ interface JobForm {
   description: string;
 }
 
-interface JobsSectionProps {
-  jobs: Job[];
-  setJobs: (jobs: Job[]) => void;
-  isJobDialogOpen: boolean;
-  setIsJobDialogOpen: (open: boolean) => void;
-  editingJob: Job | null;
-  setEditingJob: (job: Job | null) => void;
-  jobForm: JobForm;
-  setJobForm: (form: JobForm) => void;
-  handleAddJob: () => void;
-  handleEditJob: (job: Job) => void;
-  handleDeleteJob: (id: number) => void;
-}
+const JobsSection = ({ warehousemanId }: { warehousemanId: string }) => {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
+  const [editingJob, setEditingJob] = useState<Job | null>(null);
+  const [jobForm, setJobForm] = useState<JobForm>({
+    company: "",
+    position: "",
+    location: "",
+    period: "",
+    description: ""
+  });
+  const [loading, setLoading] = useState(false);
 
-const JobsSection = ({
-  jobs,
-  isJobDialogOpen,
-  setIsJobDialogOpen,
-  editingJob,
-  setEditingJob,
-  jobForm,
-  setJobForm,
-  handleAddJob,
-  handleEditJob,
-  handleDeleteJob,
-}: JobsSectionProps) => {
+  // Fetch jobs from API
+  useEffect(() => {
+    fetch("http://localhost:3000/portfolio/dashboard/work-experience")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) setJobs(data);
+        else if (data) setJobs([data]);
+      })
+      .catch(() => setJobs([]));
+  }, []);
+
+  // Add new job experience
+  const handleAddJob = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:3000/portfolio/dashboard/work-experience", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(jobForm),
+      });
+      if (response.ok) {
+        const newJob = await response.json();
+        setJobs((prev) => [...prev, newJob]);
+        setIsJobDialogOpen(false);
+        setJobForm({
+          company: "",
+          position: "",
+          location: "",
+          period: "",
+          description: ""
+        });
+      } else {
+        alert("Xəta baş verdi!");
+      }
+    } catch {
+      alert("Serverə qoşulmaq mümkün olmadı!");
+    }
+    setLoading(false);
+  };
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
@@ -59,22 +87,30 @@ const JobsSection = ({
         </CardTitle>
         <Dialog open={isJobDialogOpen} onOpenChange={setIsJobDialogOpen}>
           <DialogTrigger asChild>
-            <Button onClick={() => {
-              setEditingJob(null);
-              setJobForm({ company: "", position: "", location: "", period: "", description: "" });
-            }}>
+            <Button
+              onClick={() => {
+                setEditingJob(null);
+                setJobForm({
+                  company: "",
+                  position: "",
+                  location: "",
+                  period: "",
+                  description: ""
+                });
+              }}
+            >
               <Plus className="w-4 h-4 mr-2" />
               Yeni İş Əlavə Et
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle>{editingJob ? "İş Təcrübəsini Redaktə Et" : "Yeni İş Təcrübəsi"}</DialogTitle>
+              <DialogTitle>Yeni İş Təcrübəsi</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="company">Şirkət Adı</Label>
+                  <Label htmlFor="company">Şirkət</Label>
                   <Input
                     id="company"
                     value={jobForm.company}
@@ -82,44 +118,41 @@ const JobsSection = ({
                   />
                 </div>
                 <div>
-                  <Label htmlFor="job-position">Vəzifə</Label>
+                  <Label htmlFor="position">Vəzifə</Label>
                   <Input
-                    id="job-position"
+                    id="position"
                     value={jobForm.position}
                     onChange={(e) => setJobForm({ ...jobForm, position: e.target.value })}
                   />
                 </div>
                 <div>
-                  <Label htmlFor="location">Yer</Label>
+                  <Label htmlFor="location">Şəhər</Label>
                   <Input
                     id="location"
                     value={jobForm.location}
                     onChange={(e) => setJobForm({ ...jobForm, location: e.target.value })}
-                    placeholder="Məs: Bakı, Sumqayıt"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="period">İş Müddəti</Label>
+                  <Label htmlFor="period">Dövriyyə</Label>
                   <Input
                     id="period"
                     value={jobForm.period}
                     onChange={(e) => setJobForm({ ...jobForm, period: e.target.value })}
-                    placeholder="2020-2024"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <Label htmlFor="description">Açıqlama</Label>
+                  <Textarea
+                    id="description"
+                    value={jobForm.description}
+                    onChange={(e) => setJobForm({ ...jobForm, description: e.target.value })}
+                    rows={3}
                   />
                 </div>
               </div>
-              <div>
-                <Label htmlFor="job-description">Ətraflı (İş Təsviri)</Label>
-                <Textarea
-                  id="job-description"
-                  value={jobForm.description}
-                  onChange={(e) => setJobForm({ ...jobForm, description: e.target.value })}
-                  rows={4}
-                  placeholder="Şirkətdə görülən işlər haqqında ətraflı məlumat"
-                />
-              </div>
-              <Button className="w-full" onClick={handleAddJob}>
-                {editingJob ? "Yenilə" : "Əlavə Et"}
+              <Button onClick={handleAddJob} disabled={loading} className="w-full md:w-auto">
+                {loading ? "Yüklənir..." : "Əlavə et"}
               </Button>
             </div>
           </DialogContent>
@@ -129,36 +162,21 @@ const JobsSection = ({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Şirkət</TableHead>
-              <TableHead>Vəzifə</TableHead>
-              <TableHead>Yer</TableHead>
-              <TableHead>Müddət</TableHead>
-              <TableHead>Ətraflı</TableHead>
-              <TableHead>Əməliyyatlar</TableHead>
+              <TableCell>Şirkət</TableCell>
+              <TableCell>Vəzifə</TableCell>
+              <TableCell>Şəhər</TableCell>
+              <TableCell>Dövriyyə</TableCell>
+              <TableCell>Açıqlama</TableCell>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {jobs.map((job) => (
-              <TableRow key={job.id}>
-                <TableCell className="font-medium">{job.company}</TableCell>
+            {jobs.map((job, idx) => (
+              <TableRow key={idx}>
+                <TableCell>{job.company}</TableCell>
                 <TableCell>{job.position}</TableCell>
                 <TableCell>{job.location}</TableCell>
                 <TableCell>{job.period}</TableCell>
-                <TableCell className="max-w-xs">
-                  <p className="truncate" title={job.description}>
-                    {job.description}
-                  </p>
-                </TableCell>
-                <TableCell>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" onClick={() => handleEditJob(job)}>
-                      <Edit2 className="w-4 h-4" />
-                    </Button>
-                    <Button variant="outline" size="sm" onClick={() => handleDeleteJob(job.id)}>
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </TableCell>
+                <TableCell>{job.description}</TableCell>
               </TableRow>
             ))}
           </TableBody>
