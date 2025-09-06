@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,44 +8,74 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Plus, Edit2, Trash2, Award } from "lucide-react";
 
 interface Skill {
-  id: number;
+  id: string;
   name: string;
   level: string;
   category: string;
 }
 
-interface SkillForm {
-  name: string;
-  level: string;
-  category: string;
-}
+const SkillsSection = () => {
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [isSkillDialogOpen, setIsSkillDialogOpen] = useState(false);
+  const [editingSkill, setEditingSkill] = useState<Skill | null>(null);
+  const [skillForm, setSkillForm] = useState({ name: "", level: "", category: "" });
 
-interface SkillsSectionProps {
-  skills: Skill[];
-  setSkills: (skills: Skill[]) => void;
-  isSkillDialogOpen: boolean;
-  setIsSkillDialogOpen: (open: boolean) => void;
-  editingSkill: Skill | null;
-  setEditingSkill: (skill: Skill | null) => void;
-  skillForm: SkillForm;
-  setSkillForm: (form: SkillForm) => void;
-  handleAddSkill: () => void;
-  handleEditSkill: (skill: Skill) => void;
-  handleDeleteSkill: (id: number) => void;
-}
+  // Bacarıqları backend-dən al
+  useEffect(() => {
+    fetch("http://localhost:3000/portfolio/dashboard/skills")
+      .then((res) => res.json())
+      .then((data) => setSkills(data || []));
+  }, []);
 
-const SkillsSection = ({
-  skills,
-  isSkillDialogOpen,
-  setIsSkillDialogOpen,
-  editingSkill,
-  setEditingSkill,
-  skillForm,
-  setSkillForm,
-  handleAddSkill,
-  handleEditSkill,
-  handleDeleteSkill,
-}: SkillsSectionProps) => {
+  // Bacarıq əlavə et və ya yenilə
+  const handleAddSkill = async () => {
+    if (!skillForm.name || !skillForm.level || !skillForm.category) return;
+
+    if (editingSkill) {
+      // Yenilə
+      const response = await fetch(`http://localhost:3000/portfolio/dashboard/skills/${editingSkill.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(skillForm),
+      });
+      if (response.ok) {
+        const updated = await response.json();
+        setSkills((prev) => prev.map((s) => (s.id === editingSkill.id ? updated : s)));
+      }
+    } else {
+      // Əlavə et
+      const response = await fetch("http://localhost:3000/portfolio/dashboard/skills", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(skillForm),
+      });
+      if (response.ok) {
+        const created = await response.json();
+        setSkills((prev) => [...prev, created]);
+      }
+    }
+    setSkillForm({ name: "", level: "", category: "" });
+    setEditingSkill(null);
+    setIsSkillDialogOpen(false);
+  };
+
+  // Bacarığı redaktə et
+  const handleEditSkill = (skill: Skill) => {
+    setEditingSkill(skill);
+    setSkillForm({ name: skill.name, level: skill.level, category: skill.category });
+    setIsSkillDialogOpen(true);
+  };
+
+  // Bacarığı sil
+  const handleDeleteSkill = async (id: string) => {
+    const response = await fetch(`http://localhost:3000/portfolio/dashboard/skills/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      setSkills((prev) => prev.filter((s) => s.id !== id));
+    }
+  };
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">

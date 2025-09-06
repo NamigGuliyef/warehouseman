@@ -78,6 +78,70 @@ const JobsSection = ({ warehousemanId }: { warehousemanId: string }) => {
     setLoading(false);
   };
 
+  // Edit job
+  const handleEditJob = (job: Job) => {
+    setEditingJob(job);
+    setJobForm({
+      company: job.company,
+      position: job.position,
+      location: job.location,
+      period: job.period,
+      description: job.description
+    });
+    setIsJobDialogOpen(true);
+  };
+
+  // Delete job
+  const handleDeleteJob = async (id?: string) => {
+    if (!id) return;
+    if (!window.confirm("Bu iş təcrübəsini silmək istədiyinizə əminsiniz?")) return;
+    try {
+      const response = await fetch(`http://localhost:3000/portfolio/dashboard/work-experience/${id}`, {
+        method: "DELETE"
+      });
+      if (response.ok) {
+        setJobs((prev) => prev.filter((job) => job.id !== id));
+      } else {
+        alert("Silinmə zamanı xəta baş verdi!");
+      }
+    } catch {
+      alert("Serverə qoşulmaq mümkün olmadı!");
+    }
+  };
+
+  // Update job (edit zamanı)
+  const handleUpdateJob = async () => {
+    if (!editingJob?.id) return;
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:3000/portfolio/dashboard/work-experience/${editingJob.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(jobForm),
+      });
+      if (response.ok) {
+        const updatedJob = await response.json();
+        setJobs((prev) =>
+          prev.map((job) => (job.id === editingJob.id ? updatedJob : job))
+        );
+        setIsJobDialogOpen(false);
+        setEditingJob(null);
+        setJobForm({
+          company: "",
+          position: "",
+          location: "",
+          period: "",
+          description: ""
+        });
+      } else {
+        alert("Yeniləmə zamanı xəta baş verdi!");
+      }
+    } catch {
+      alert("Serverə qoşulmaq mümkün olmadı!");
+    }
+    setLoading(false);
+  };
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
@@ -151,8 +215,12 @@ const JobsSection = ({ warehousemanId }: { warehousemanId: string }) => {
                   />
                 </div>
               </div>
-              <Button onClick={handleAddJob} disabled={loading} className="w-full md:w-auto">
-                {loading ? "Yüklənir..." : "Əlavə et"}
+              <Button
+                onClick={editingJob ? handleUpdateJob : handleAddJob}
+                disabled={loading}
+                className="w-full md:w-auto"
+              >
+                {loading ? "Yüklənir..." : editingJob ? "Yenilə" : "Əlavə et"}
               </Button>
             </div>
           </DialogContent>
@@ -167,6 +235,7 @@ const JobsSection = ({ warehousemanId }: { warehousemanId: string }) => {
               <TableCell>Şəhər</TableCell>
               <TableCell>Dövriyyə</TableCell>
               <TableCell>Açıqlama</TableCell>
+              <TableCell>Əməliyyatlar</TableCell> {/* Əməliyyatlar sütunu əlavə olundu */}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -177,6 +246,24 @@ const JobsSection = ({ warehousemanId }: { warehousemanId: string }) => {
                 <TableCell>{job.location}</TableCell>
                 <TableCell>{job.period}</TableCell>
                 <TableCell>{job.description}</TableCell>
+                <TableCell>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleEditJob(job)}
+                    >
+                      Redaktə
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => handleDeleteJob(job.id)}
+                    >
+                      Sil
+                    </Button>
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

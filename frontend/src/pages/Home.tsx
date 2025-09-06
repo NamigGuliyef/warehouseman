@@ -50,6 +50,14 @@ type WorkExperienceDTO = {
   warehousemanId: string;
 };
 
+// Skill tipini əlavə et
+type SkillDTO = {
+  id: string;
+  name: string;
+  level: string;
+  category: string;
+};
+
 const Home = () => {
   // State for warehouseman profile
   const [profile, setProfile] = useState<WarehousemanDTO | null>(null);
@@ -57,11 +65,14 @@ const Home = () => {
   // State for work experiences
   const [workExperience, setWorkExperience] = useState<WorkExperienceDTO[]>([]);
 
+  const [skills, setSkills] = useState<SkillDTO[]>([]);
+
   useEffect(() => {
     // Fetch warehouseman profile from API
     fetch("http://localhost:3000/portfolio/dashboard/warehouseman")
       .then((res) => res.json())
       .then((data) => {
+        console.log("API-dən gələn:", data);
         if (Array.isArray(data)) {
           setProfile(data[0]);
         } else {
@@ -81,6 +92,12 @@ const Home = () => {
         }
       })
       .catch(() => setWorkExperience([]));
+
+    // Bacarıqları backend-dən al
+    fetch("http://localhost:3000/portfolio/dashboard/skills")
+      .then((res) => res.json())
+      .then((data) => setSkills(Array.isArray(data) ? data : []))
+      .catch(() => setSkills([]));
   }, []);
 
   // Fallback data if API not loaded
@@ -134,17 +151,17 @@ const Home = () => {
 
   const workExperienceList = workExperience.length > 0 ? workExperience : defaultWorkExperience;
 
-  const skills = [
-    "Anbar İdarəetməsi Sistemləri (WMS)",
-    "Microsoft Excel (İrəliləmiş)",
-    "SAP Logistics",
-    "Inventar Nəzarəti",
-    "Barcode/QR kod sistemləri",
-    "SQL Əsasları",
-    "Python (Əsasları)",
-    "Data Analysis",
-    "Logistika Planlaşdırması",
-  ];
+  // const skills = [
+  //   "Anbar İdarəetməsi Sistemləri (WMS)",
+  //   "Microsoft Excel (İrəliləmiş)",
+  //   "SAP Logistics",
+  //   "Inventar Nəzarəti",
+  //   "Barcode/QR kod sistemləri",
+  //   "SQL Əsasları",
+  //   "Python (Əsasları)",
+  //   "Data Analysis",
+  //   "Logistika Planlaşdırması",
+  // ];
 
   const certificates = [
     {
@@ -751,20 +768,29 @@ const Home = () => {
               <Card className="relative bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-sm border-2 border-primary/20 shadow-2xl">
                 <CardContent className="p-8 md:p-12">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {skills.map((skill, index) => (
-                      <div
-                        key={index}
-                        className="group relative overflow-hidden"
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg"></div>
-                        <Badge
-                          variant="secondary"
-                          className="relative w-full p-4 text-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-105 hover:shadow-lg border border-primary/20 group-hover:border-primary/50 font-medium"
+                    {skills.length > 0 ? (
+                      skills.map((skill) => (
+                        <div
+                          key={skill.id}
+                          className="group relative overflow-hidden"
                         >
-                          <span className="relative z-10">{skill}</span>
-                        </Badge>
+                          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg"></div>
+                          <Badge
+                            variant="secondary"
+                            className="relative w-full p-4 text-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-105 hover:shadow-lg border border-primary/20 group-hover:border-primary/50 font-medium"
+                          >
+                            <span className="relative z-10">{skill.name}</span>
+                            <span className="ml-2 text-xs text-muted-foreground">
+                              ({skill.category} / {skill.level})
+                            </span>
+                          </Badge>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="col-span-3 text-center text-muted-foreground">
+                        Bacarıq tapılmadı.
                       </div>
-                    ))}
+                    )}
                   </div>
 
                   {/* Decorative elements */}
