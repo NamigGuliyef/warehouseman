@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,48 +8,110 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Plus, Edit2, Trash2, Upload, X, FileText } from "lucide-react";
 
 interface Certificate {
-  id: number;
+  id: string;
   name: string;
   organization: string;
   date: string;
-  image: string;
+  image: string; // URL və ya base64
 }
 
 interface CertificateForm {
   name: string;
   organization: string;
   date: string;
-  image: string;
+  image: string; // preview üçün
+  file?: File | null; // yalnız göndərmək üçün
 }
 
-interface CertificatesSectionProps {
-  certificates: Certificate[];
-  setCertificates: (certificates: Certificate[]) => void;
-  isCertDialogOpen: boolean;
-  setIsCertDialogOpen: (open: boolean) => void;
-  editingCert: Certificate | null;
-  setEditingCert: (cert: Certificate | null) => void;
-  certForm: CertificateForm;
-  setCertForm: (form: CertificateForm) => void;
-  handleAddCertificate: () => void;
-  handleEditCertificate: (cert: Certificate) => void;
-  handleDeleteCertificate: (id: number) => void;
-  handleFileUpload: (event: any, setForm: any, field: string) => void;
-}
+const CertificatesSection = () => {
+  const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const [isCertDialogOpen, setIsCertDialogOpen] = useState(false);
+  const [editingCert, setEditingCert] = useState<Certificate | null>(null);
+  const [certForm, setCertForm] = useState<CertificateForm>({ name: "", organization: "", date: "", image: "", file: null });
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-const CertificatesSection = ({
-  certificates,
-  isCertDialogOpen,
-  setIsCertDialogOpen,
-  editingCert,
-  setEditingCert,
-  certForm,
-  setCertForm,
-  handleAddCertificate,
-  handleEditCertificate,
-  handleDeleteCertificate,
-  handleFileUpload,
-}: CertificatesSectionProps) => {
+  // Sertifikatları backend-dən al
+  useEffect(() => {
+    fetch("http://localhost:3000/portfolio/dashboard/certificates")
+      .then((res) => res.json())
+      .then((data) => setCertificates(data || []));
+  }, []);
+
+  // Sertifikat əlavə et və ya yenilə
+  const handleAddCertificate = async () => {
+    if (!certForm.name || !certForm.organization || !certForm.date) return;
+
+    const formData = new FormData();
+    formData.append("name", certForm.name);
+    formData.append("organization", certForm.organization);
+    formData.append("date", certForm.date);
+    if (certForm.file) {
+      formData.append("image", certForm.file);
+    }
+
+    if (editingCert) {
+      // Yenilə
+      const response = await fetch(`http://localhost:3000/portfolio/dashboard/certificates/${editingCert.id}`, {
+        method: "PATCH",
+        body: formData,
+      });
+      if (response.ok) {
+        const updated = await response.json();
+        setCertificates((prev) => prev.map((c) => (c.id === editingCert.id ? updated : c)));
+      }
+    } else {
+      // Əlavə et
+      const response = await fetch("http://localhost:3000/portfolio/dashboard/certificates", {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        const created = await response.json();
+        setCertificates((prev) => [...prev, created]);
+      }
+    }
+    setCertForm({ name: "", organization: "", date: "", image: "", file: null });
+    setEditingCert(null);
+    setIsCertDialogOpen(false);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  // Sertifikatı redaktə et
+  const handleEditCertificate = (cert: Certificate) => {
+    setEditingCert(cert);
+    setCertForm({
+      name: cert.name,
+      organization: cert.organization,
+      date: cert.date,
+      image: cert.image,
+      file: null,
+    });
+    setIsCertDialogOpen(true);
+  };
+
+  // Sertifikatı sil
+  const handleDeleteCertificate = async (id: string) => {
+    const response = await fetch(`http://localhost:3000/portfolio/dashboard/certificates/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      setCertificates((prev) => prev.filter((c) => c.id !== id));
+    }
+  };
+
+  // Fayl yükləmə
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setCertForm((prev) => ({ ...prev, file }));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCertForm((prev) => ({ ...prev, image: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
@@ -60,7 +123,8 @@ const CertificatesSection = ({
           <DialogTrigger asChild>
             <Button onClick={() => {
               setEditingCert(null);
-              setCertForm({ name: "", organization: "", date: "", image: "" });
+              setCertForm({ name: "", organization: "", date: "", image: "", file: null });
+              if (fileInputRef.current) fileInputRef.current.value = "";
             }}>
               <Plus className="w-4 h-4 mr-2" />
               Yeni Sertifikat Əlavə Et
@@ -103,7 +167,8 @@ const CertificatesSection = ({
                     id="cert-image"
                     type="file"
                     accept="image/*"
-                    onChange={(e) => handleFileUpload(e, setCertForm, 'image')}
+                    ref={fileInputRef}
+                    onChange={handleFileUpload}
                     className="file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-primary file:text-primary-foreground"
                   />
                   <Upload className="w-5 h-5 text-muted-foreground" />
@@ -115,7 +180,10 @@ const CertificatesSection = ({
                       size="sm"
                       variant="outline"
                       className="absolute -top-2 -right-2 h-6 w-6 p-0"
-                      onClick={() => setCertForm({ ...certForm, image: "" })}
+                      onClick={() => {
+                        setCertForm({ ...certForm, image: "", file: null });
+                        if (fileInputRef.current) fileInputRef.current.value = "";
+                      }}
                     >
                       <X className="h-3 w-3" />
                     </Button>
