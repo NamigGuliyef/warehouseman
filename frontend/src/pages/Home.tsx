@@ -40,6 +40,12 @@ type WarehousemanDTO = {
   efficiencyRate?: string;
 };
 
+const socialLinks = [
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/sizin-link" },
+  { name: "WhatsApp", url: "https://wa.me/994501234567" },
+  { name: "Instagram", url: "https://instagram.com/sizinprofil" },
+];
+
 // WorkExperienceDTO type
 type WorkExperienceDTO = {
   company: string;
@@ -58,6 +64,14 @@ type SkillDTO = {
   category: string;
 };
 
+type CertificateDTO = {
+  id: string;
+  name: string;
+  date: string;
+  issuer: string;
+  image: string;
+};
+
 const Home = () => {
   // State for warehouseman profile
   const [profile, setProfile] = useState<WarehousemanDTO | null>(null);
@@ -66,6 +80,8 @@ const Home = () => {
   const [workExperience, setWorkExperience] = useState<WorkExperienceDTO[]>([]);
 
   const [skills, setSkills] = useState<SkillDTO[]>([]);
+
+  const [certificates, setCertificates] = useState<CertificateDTO[]>([]);
 
   useEffect(() => {
     // Fetch warehouseman profile from API
@@ -98,6 +114,12 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => setSkills(Array.isArray(data) ? data : []))
       .catch(() => setSkills([]));
+
+    // Sertifikatları backend-dən al
+    fetch("http://localhost:3000/portfolio/dashboard/certificates")
+      .then((res) => res.json())
+      .then((data) => setCertificates(Array.isArray(data) ? data : []))
+      .catch(() => setCertificates([]));
   }, []);
 
   // Fallback data if API not loaded
@@ -163,7 +185,7 @@ const Home = () => {
   //   "Logistika Planlaşdırması",
   // ];
 
-  const certificates = [
+  const certificatesData = [
     {
       name: "Anbar İdarəetməsi Sertifikatı",
       date: "2023",
@@ -833,48 +855,54 @@ const Home = () => {
           </div>
 
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-            {certificates.map((cert, index) => (
-              <Card
-                key={index}
-                className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 bg-gradient-to-br from-card to-card/80 border-2 hover:border-primary/50"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            {certificates.length > 0 ? (
+              certificates.map((cert, index) => (
+                <Card
+                  key={cert.id || index}
+                  className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 bg-gradient-to-br from-card to-card/80 border-2 hover:border-primary/50"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                <CardHeader className="relative p-0">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={cert.image}
-                      alt={cert.name}
-                      className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                      <Award className="h-5 w-5 text-primary" />
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="p-2 bg-primary/10 rounded-lg">
-                        <Award className="h-6 w-6 text-primary" />
+                  <CardHeader className="relative p-0">
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={cert.image}
+                        alt={cert.name}
+                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                        <Award className="h-5 w-5 text-primary" />
                       </div>
-                      <Badge
-                        variant="outline"
-                        className="border-primary/50 text-primary font-semibold"
-                      >
-                        {cert.date}
-                      </Badge>
                     </div>
-                    <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors duration-300">
-                      {cert.name}
-                    </CardTitle>
-                    <CardDescription className="text-sm font-medium text-secondary">
-                      {cert.issuer}
-                    </CardDescription>
-                  </div>
-                </CardHeader>
-              </Card>
-            ))}
+
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                          <Award className="h-6 w-6 text-primary" />
+                        </div>
+                        <Badge
+                          variant="outline"
+                          className="border-primary/50 text-primary font-semibold"
+                        >
+                          {cert.date}
+                        </Badge>
+                      </div>
+                      <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors duration-300">
+                        {cert.name}
+                      </CardTitle>
+                      <CardDescription className="text-sm font-medium text-secondary">
+                        {cert.issuer}
+                      </CardDescription>
+                    </div>
+                  </CardHeader>
+                </Card>
+              ))
+            ) : (
+              <div className="col-span-4 text-center text-muted-foreground">
+                Sertifikat tapılmadı.
+              </div>
+            )}
           </div>
 
           {/* Call to action */}
@@ -945,23 +973,27 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="space-y-4">
-                    <h3 className="text-lg sm:text-xl font-semibold">
-                      Sosial şəbəkələr
-                    </h3>
-                    <div className="flex flex-wrap gap-2 sm:gap-4">
-                      {["LinkedIn", "WhatsApp", "Instagram"].map((social) => (
-                        <Button
-                          key={social}
-                          variant="outline"
-                          size="sm"
-                          className="text-xs sm:text-sm"
-                        >
-                          {social}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
+
+<div className="space-y-4">
+  <h3 className="text-lg sm:text-xl font-semibold">
+    Sosial şəbəkələr
+  </h3>
+  <div className="flex flex-wrap gap-2 sm:gap-4">
+    {socialLinks.map((social) => (
+      <Button
+        key={social.name}
+        variant="outline"
+        size="sm"
+        className="text-xs sm:text-sm"
+        asChild
+      >
+        <a href={social.url} target="_blank" rel="noopener noreferrer">
+          {social.name}
+        </a>
+      </Button>
+    ))}
+  </div>
+</div>
                 </div>
               </CardContent>
             </Card>
