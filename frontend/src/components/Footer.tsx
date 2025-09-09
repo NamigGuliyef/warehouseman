@@ -1,13 +1,13 @@
 
-import { Mail, Phone, Linkedin, Instagram, MessageCircle } from "lucide-react";
+import { Mail, Phone, Linkedin, Instagram, MessageCircle, Github } from "lucide-react";
 
 const Footer = () => {
   const socialLinks = [
-    { icon: Mail, href: "mailto:namiq@example.com", label: "Email" },
-    { icon: Phone, href: "tel:+994501234567", label: "Telefon" },
-    { icon: Linkedin, href: "https://linkedin.com/in/namiq", label: "LinkedIn" },
-    { icon: MessageCircle, href: "https://wa.me/994501234567", label: "WhatsApp" },
-    { icon: Instagram, href: "https://instagram.com/namiq", label: "Instagram" },
+    { icon: Mail, href: "mailto:quliyevnamiq8@gmail.com", label: "Email" },
+    { icon: Phone, href: "tel:+994773337479", label: "Telefon" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/namig-guliyev", label: "LinkedIn" },
+    { icon: MessageCircle, href: "https://wa.me/994559533073", label: "WhatsApp" },
+    { icon: Github, href: "https://github.com/NamigGuliyef", label: "Github" },
   ];
 
   return (
@@ -35,7 +35,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="text-center text-muted-foreground">
             <p className="text-xs sm:text-sm px-4">
-              © 2024 Namiq Quliyev. Bütün hüquqlar qorunur.
+              © 2025 Namiq Quliyev. Bütün hüquqlar qorunur.
             </p>
           </div>
         </div>

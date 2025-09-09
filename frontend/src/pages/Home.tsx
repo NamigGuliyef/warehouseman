@@ -41,9 +41,9 @@ type WarehousemanDTO = {
 };
 
 const socialLinks = [
-  { name: "LinkedIn", url: "https://www.linkedin.com/in/sizin-link" },
-  { name: "WhatsApp", url: "https://wa.me/994501234567" },
-  { name: "Instagram", url: "https://instagram.com/sizinprofil" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/namig-guliyev/" },
+  { name: "WhatsApp", url: "https://wa.me/994559533073" },
+  { name: "Github", url: "https://github.com/NamigGuliyef" },
 ];
 
 // WorkExperienceDTO type
