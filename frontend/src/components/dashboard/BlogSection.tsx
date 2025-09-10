@@ -182,25 +182,26 @@ const BlogSection = () => {
   };
 
   // Aktivlik dəyişəndə API-ə göndər
-  const handleToggleActive = async (editingBlog: Blog) => {
-    try {
-      await fetch(
-        `http://localhost:3000/portfolio/dashboard/blog-posts/${editingBlog.id}`,
-        {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ active: !editingBlog.active }),
-        }
-      );
-      setBlogs(
-        blogs.map((b) =>
-          b.id === editingBlog.id ? { ...b, active: !editingBlog.active } : b
-        )
-      );
-    } catch {
-      alert("Aktivlik dəyişdirilə bilmədi!");
-    }
-  };
+const handleToggleActive = async (editingBlog: Blog) => {
+  try {
+    await fetch(
+      `http://localhost:3000/portfolio/dashboard/blog-posts/${editingBlog.id}/toggle-active`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ active: !editingBlog.active }),
+      }
+    );
+    setBlogs(
+      blogs.map((b) =>
+        b.id === editingBlog.id ? { ...b, active: !editingBlog.active } : b
+      )
+    );
+  } catch {
+    alert("Aktivlik dəyişdirilə bilmədi!");
+  }
+};
+
 
   // Şəkil yükləmə
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
