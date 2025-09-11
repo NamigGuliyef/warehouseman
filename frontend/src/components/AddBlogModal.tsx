@@ -14,43 +14,69 @@ const AddBlogModal = () => {
     title: "",
     category: "",
     content: "",
-    image: "",
+    image: null as File | null,
     readTime: "",
-    author: ""
+    author: "",
   });
+  const [previewImage, setPreviewImage] = useState<string>("");
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      setBlogForm((prev) => ({ ...prev, image: file }));
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setBlogForm(prev => ({ ...prev, image: reader.result as string }));
-      };
+      reader.onloadend = () => setPreviewImage(reader.result as string);
       reader.readAsDataURL(file);
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!blogForm.title || !blogForm.content) {
       toast({
         title: "Səhv",
         description: "Başlıq və məzmun sahələri mütləqdir",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
 
-    // In a real app, this would send to backend
-    console.log("New blog post:", blogForm);
+    try {
+      const formData = new FormData();
+      formData.append("author", blogForm.author);
+      formData.append("title", blogForm.title);
+      formData.append("category", blogForm.category);
+      formData.append("description", blogForm.content); // backend "description" gözləyir
+      formData.append("readTime", blogForm.readTime);
+      formData.append("active", "false"); // default olaraq deaktiv
+      if (blogForm.image) {
+        formData.append("image", blogForm.image);
+      }
 
-    toast({
-      title: "Uğurlu!",
-      description: "Blog yazınız uğurla yaradıldı və nəzərdən keçirilmək üçün göndərildi"
-    });
+      const res = await fetch("http://localhost:3000/portfolio/dashboard/blog-posts", {
+        method: "POST",
+        body: formData,
+      });
 
-    // Reset form and close modal
-    setBlogForm({ title: "", category: "", content: "", image: "", readTime: "", author: "" });
-    setIsOpen(false);
+      if (!res.ok) {
+        throw new Error("Xəta baş verdi");
+      }
+
+      toast({
+        title: "Uğurlu!",
+        description: "Blog yazınız uğurla yaradıldı və nəzərdən keçirilmək üçün göndərildi",
+      });
+
+      // Reset form
+      setBlogForm({ title: "", category: "", content: "", image: null, readTime: "", author: "" });
+      setPreviewImage("");
+      setIsOpen(false);
+    } catch (err) {
+      toast({
+        title: "Xəta",
+        description: "Blog yazısı göndərilərkən problem yarandı",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -124,14 +150,17 @@ const AddBlogModal = () => {
               />
               <Upload className="w-5 h-5 text-muted-foreground" />
             </div>
-            {blogForm.image && (
+            {previewImage && (
               <div className="mt-2 relative">
-                <img src={blogForm.image} alt="Preview" className="w-24 h-24 object-cover rounded" />
+                <img src={previewImage} alt="Preview" className="w-24 h-24 object-cover rounded" />
                 <Button
                   size="sm"
                   variant="outline"
                   className="absolute -top-2 -right-2 h-6 w-6 p-0"
-                  onClick={() => setBlogForm({ ...blogForm, image: "" })}
+                  onClick={() => {
+                    setBlogForm({ ...blogForm, image: null });
+                    setPreviewImage("");
+                  }}
                 >
                   <X className="h-3 w-3" />
                 </Button>
