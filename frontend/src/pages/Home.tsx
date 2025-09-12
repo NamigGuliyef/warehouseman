@@ -802,9 +802,9 @@ const Home = () => {
                             className="relative w-full p-4 text-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-105 hover:shadow-lg border border-primary/20 group-hover:border-primary/50 font-medium"
                           >
                             <span className="relative z-10">{skill.name}</span>
-                            <span className="ml-2 text-xs text-muted-foreground">
+                            {/* <span className="ml-2 text-xs text-muted-foreground">
                               ({skill.category} / {skill.level})
-                            </span>
+                            </span> */}
                           </Badge>
                         </div>
                       ))
