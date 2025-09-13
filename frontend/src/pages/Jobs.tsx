@@ -52,13 +52,13 @@ const Jobs = () => {
     // requirements massiv və ya string ola bilər, massivə çevir
     const jobs = Array.isArray(data)
       ? data.map((job) => ({
-          ...job,
-          requirements: Array.isArray(job.requirements)
-            ? job.requirements
-            : typeof job.requirements === "string"
+        ...job,
+        requirements: Array.isArray(job.requirements)
+          ? job.requirements
+          : typeof job.requirements === "string"
             ? job.requirements.split(",").map((s) => s.trim())
             : [],
-        }))
+      }))
       : [];
     setJobListings(jobs);
     setLoading(false);
@@ -155,7 +155,10 @@ const Jobs = () => {
             jobListings.map((job) => {
               const daysLeft = getDaysLeft(job.deadline);
               return (
-                <Card key={job.id} className="card-3d group">
+                <Card
+                  key={job.id}
+                  className="card-3d group flex flex-col min-h-[500px]"
+                >
                   <CardHeader>
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center space-x-2 flex-wrap gap-2">
@@ -172,23 +175,8 @@ const Jobs = () => {
 
                         {/* Prioritet */}
                         <Badge variant="secondary">
-                         Prioritet :  {job.urgent ? "Yüksək" : "Normal"}
+                          Prioritet : {job.urgent ? "Yüksək" : "Normal"}
                         </Badge>
-
-                        {/* Status
-                        {job.status && (
-                          <Badge
-                            variant={
-                              job.status === "aktiv"
-                                ? "default"
-                                : job.status === "gözləmədə"
-                                ? "secondary"
-                                : "outline"
-                            }
-                          >
-                            {job.status}
-                          </Badge>
-                        )} */}
                       </div>
                       <Badge
                         variant={
@@ -234,12 +222,14 @@ const Jobs = () => {
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
+                  <CardContent className="flex flex-col flex-1">
+                    <div className="space-y-4 flex-1">
                       <div>
                         <h4 className="font-semibold mb-2">İş təsviri:</h4>
                         <p className="text-muted-foreground leading-relaxed">
-                          {job.description}
+                          {job.description.length > 250
+                            ? job.description.slice(0, 250) + "..."
+                            : job.description}
                         </p>
                       </div>
                       <div>
@@ -247,31 +237,32 @@ const Jobs = () => {
                         <div className="flex flex-wrap gap-2">
                           {(Array.isArray(job.requirements)
                             ? job.requirements
-                            : [job.requirements]
+                            : job.requirements?.split(",") || []
                           ).map((req, index) => (
                             <Badge
                               key={index}
                               variant="secondary"
                               className="text-xs"
                             >
-                              {req}
+                              {req.trim()}
                             </Badge>
                           ))}
                         </div>
                       </div>
-                      <div className="flex items-center justify-between pt-4 border-t border-border">
-                        <div className="text-xs text-muted-foreground">
-                          Elan tarixi:{" "}
-                          {new Date(job.createdAt).toLocaleDateString("az-AZ")}
-                        </div>
-                        <Button
-                          className="btn-industrial"
-                          onClick={() => window.open(job.link, "_blank")}
-                        >
-                          Ətraflı bax
-                          <ExternalLink className="h-4 w-4 ml-2" />
-                        </Button>
+
+                    </div>
+                    <div className="flex items-center justify-between pt-4 border-t border-border mt-auto">
+                      <div className="text-xs text-muted-foreground">
+                        Elan tarixi:{" "}
+                        {new Date(job.createdAt).toLocaleDateString("az-AZ")}
                       </div>
+                      <Button
+                        className="btn-industrial"
+                        onClick={() => window.open(job.link, "_blank")}
+                      >
+                        Ətraflı bax
+                        <ExternalLink className="h-4 w-4 ml-2" />
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
