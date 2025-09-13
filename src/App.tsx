@@ -22,7 +22,7 @@ const App = () => (
       <BrowserRouter>
         <div className="min-h-screen flex flex-col">
           <Navbar />
-          <main className="flex-1 pt-14 sm:pt-16">
+          <main className="flex-1 pt-16 sm:pt-18">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/blog" element={<Blog />} />

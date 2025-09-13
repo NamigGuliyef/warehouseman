@@ -15,38 +15,40 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/80 border-b border-border/50 shadow-soft">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-14 sm:h-16">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/98 backdrop-blur-xl supports-[backdrop-filter]:bg-background/95 border-b border-border shadow-card transition-all duration-300">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="flex items-center justify-between h-16 sm:h-18">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-soft group-hover:shadow-elegant transition-all duration-500 group-hover:scale-110">
-              <span className="text-primary-foreground font-bold text-xs sm:text-sm">NQ</span>
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary to-primary-hover rounded-lg flex items-center justify-center shadow-card group-hover:shadow-elegant transition-all duration-300 group-hover:scale-105">
+              <span className="text-primary-foreground font-bold text-sm sm:text-base">NQ</span>
             </div>
-            <span className="font-bold text-lg sm:text-xl bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+            <span className="font-bold text-xl sm:text-2xl text-foreground group-hover:text-primary transition-colors duration-300">
               Namiq Quliyev
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className="text-foreground hover:text-primary transition-all duration-500 font-medium text-sm lg:text-base relative group"
-              >
-                {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-500 group-hover:w-full"></span>
-              </Link>
-            ))}
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex items-center justify-center flex-1">
+            <div className="flex items-center space-x-8 lg:space-x-12">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-foreground hover:text-primary transition-all duration-300 font-semibold text-sm lg:text-base relative group px-4 py-2"
+                >
+                  {item.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary rounded-full transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10 hover:bg-primary/10 rounded-xl">
-                <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Button variant="ghost" size="icon" className="h-10 w-10 hover:bg-primary/10 rounded-lg border border-border/50 hover:border-primary/30 transition-all duration-300">
+                <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] sm:w-[300px] bg-background/95 backdrop-blur-lg border-l border-border/50">

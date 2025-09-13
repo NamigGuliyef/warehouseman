@@ -95,27 +95,34 @@ const Jobs = () => {
   const uniqueCities = Array.from(new Set(jobListings.map((job) => job.city)));
 
   return (
-    <div className="min-h-screen py-20">
-      {/* Header */}
-      <div className="container mx-auto px-4 mb-16">
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            İş Elanları
+    <div className="min-h-screen py-20 bg-gradient-to-br from-background to-accent/10">
+      {/* Professional Header */}
+      <div className="container mx-auto px-4 mb-16 max-w-7xl">
+        <div className="text-center max-w-4xl mx-auto">
+          <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-6 py-3 rounded-full mb-8 border border-primary/20 font-semibold">
+            <Briefcase className="h-4 w-4" />
+            <span>Karyera İmkanları</span>
+          </div>
+          <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-foreground">
+            Anbar və Logistika 
+            <span className="text-primary block lg:inline lg:ml-3">Vakansiyaları</span>
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            Anbar və logistika sahəsində aktual vakansiyalar və karyera
-            imkanları
+          <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+            Professional inkişaf imkanları və anbar-logistika sahəsində 
+            aktual iş elanları
           </p>
         </div>
       </div>
 
-      {/* Filter Section */}
-      <div className="container mx-auto px-4 mb-12">
-        <Card className="card-3d">
+      {/* Professional Filter Section */}
+      <div className="container mx-auto px-4 mb-12 max-w-7xl">
+        <Card className="bg-card border border-border shadow-card">
           <CardHeader>
-            <div className="flex items-center space-x-2">
-              <Filter className="h-5 w-5 text-primary" />
-              <CardTitle>Filterlər</CardTitle>
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Filter className="h-5 w-5 text-primary" />
+              </div>
+              <CardTitle className="text-xl font-semibold">Vakansiya Filterləri</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
@@ -142,9 +149,9 @@ const Jobs = () => {
         </Card>
       </div>
 
-      {/* Jobs Grid */}
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+      {/* Professional Jobs Grid */}
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {loading ? (
             <div className="col-span-2 text-center text-lg">Yüklənir...</div>
           ) : jobListings.length === 0 ? (
@@ -155,7 +162,7 @@ const Jobs = () => {
             jobListings.map((job) => {
               const daysLeft = getDaysLeft(job.deadline);
               return (
-                <Card key={job.id} className="card-3d group">
+                <Card key={job.id} className="bg-card border border-border hover:shadow-card transition-all duration-300 group">
                   <CardHeader>
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center space-x-2 flex-wrap gap-2">

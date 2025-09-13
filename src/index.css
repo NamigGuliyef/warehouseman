@@ -6,58 +6,58 @@
 
 @layer base {
   :root {
-    /* Modern Elegant Base Colors */
-    --background: 240 10% 98%;
-    --foreground: 240 10% 8%;
+    /* Professional Business Base Colors */
+    --background: 210 20% 98%;
+    --foreground: 210 15% 10%;
 
-    /* Sophisticated Card System */
+    /* Corporate Card System */
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 8%;
+    --card-foreground: 210 15% 10%;
 
-    /* Refined Popover System */
+    /* Business Popover System */
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 8%;
+    --popover-foreground: 210 15% 10%;
 
-    /* Elegant Primary - Deep Violet */
-    --primary: 262 83% 58%;
+    /* Professional Navy Primary */
+    --primary: 215 84% 25%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 262 83% 50%;
+    --primary-hover: 215 84% 20%;
 
-    /* Sophisticated Teal Secondary */
-    --secondary: 173 58% 39%;
+    /* Corporate Gray Secondary */
+    --secondary: 210 10% 45%;
     --secondary-foreground: 0 0% 100%;
-    --secondary-hover: 173 58% 32%;
+    --secondary-hover: 210 10% 40%;
 
-    /* Elegant Grays */
-    --muted: 240 10% 96%;
-    --muted-foreground: 240 5% 45%;
+    /* Professional Grays */
+    --muted: 210 15% 96%;
+    --muted-foreground: 210 12% 50%;
 
-    /* Refined Accent Colors */
-    --accent: 240 8% 94%;
-    --accent-foreground: 240 10% 15%;
+    /* Business Accent Colors */
+    --accent: 210 15% 94%;
+    --accent-foreground: 210 15% 15%;
 
     /* Alert Colors */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    /* Elegant Borders and Inputs */
-    --border: 240 8% 90%;
-    --input: 240 8% 94%;
-    --ring: 262 83% 58%;
+    /* Professional Borders and Inputs */
+    --border: 210 12% 88%;
+    --input: 210 15% 94%;
+    --ring: 215 84% 25%;
 
     --radius: 1rem;
 
-    /* Modern Gradients */
+    /* Professional Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-hover)));
-    --gradient-elegant: linear-gradient(145deg, hsl(240 10% 98%), hsl(240 8% 96%));
-    --gradient-hero: linear-gradient(135deg, hsl(262 83% 58% / 0.05), hsl(173 58% 39% / 0.05));
+    --gradient-elegant: linear-gradient(145deg, hsl(210 20% 98%), hsl(210 15% 96%));
+    --gradient-hero: linear-gradient(135deg, hsl(215 84% 25% / 0.03), hsl(210 10% 45% / 0.05));
 
-    /* Sophisticated Shadows */
-    --shadow-elegant: 0 8px 32px -8px hsl(240 10% 20% / 0.12);
-    --shadow-card: 0 4px 16px -4px hsl(240 10% 20% / 0.08);
-    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.2);
-    --shadow-soft: 0 2px 8px -2px hsl(240 10% 20% / 0.06);
+    /* Corporate Shadows */
+    --shadow-elegant: 0 8px 32px -8px hsl(210 15% 10% / 0.08);
+    --shadow-card: 0 4px 16px -4px hsl(210 15% 10% / 0.05);
+    --shadow-glow: 0 0 24px hsl(var(--primary) / 0.12);
+    --shadow-soft: 0 2px 8px -2px hsl(210 15% 10% / 0.04);
 
     /* Smooth Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);

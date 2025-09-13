@@ -39,16 +39,38 @@ const Blog = () => {
   };
 
   return (
-    <div className="min-h-screen py-20">
-      {/* Header */}
-      <div className="container mx-auto px-4 mb-16">
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Logistika Bloqu
+    <div className="min-h-screen py-20 bg-gradient-to-br from-background to-accent/10">
+      {/* Professional Header */}
+      <div className="container mx-auto px-4 mb-16 max-w-7xl">
+        <div className="text-center max-w-4xl mx-auto">
+          <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-6 py-3 rounded-full mb-8 border border-primary/20 font-semibold">
+            <Calendar className="h-4 w-4" />
+            <span>Professional Blog</span>
+          </div>
+          <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-foreground">
+            Anbar və Logistika 
+            <span className="text-primary block lg:inline lg:ml-3">Təcrübələrim</span>
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-            Anbar idarəetməsi və logistika sahəsində təcrübələrim, məsləhətlərim və innovativ həllər haqqında məqalələr
+          <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-12 max-w-3xl mx-auto">
+            Professional təcrübəm, sənaye trendləri və anbar idarəetməsi sahəsində 
+            innovativ həllər haqqında məqalələr və məsləhətlər
           </p>
+
+          {/* Professional Stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-2xl mx-auto">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary mb-1">50+</div>
+              <div className="text-sm text-muted-foreground">Məqalə</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary mb-1">15K+</div>
+              <div className="text-sm text-muted-foreground">Oxucu</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary mb-1">7+</div>
+              <div className="text-sm text-muted-foreground">İl Təcrübə</div>
+            </div>
+          </div>
 
           {/* Add Blog Button */}
           <div className="flex justify-center">
@@ -57,13 +79,13 @@ const Blog = () => {
         </div>
       </div>
 
-      {/* Blog Posts Grid */}
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+      {/* Professional Blog Posts Grid */}
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {blogPosts.map((post, index) => (
             <Card
               key={post._id}
-              className={`card-3d group cursor-pointer hover:scale-105 transition-all duration-300 ${index === 0 ? 'lg:col-span-2' : ''}`}
+              className={`bg-card border border-border hover:shadow-card transition-all duration-300 group cursor-pointer ${index === 0 ? 'xl:col-span-2' : ''}`}
               onClick={() => handleReadPost(post)}
             >
               <CardHeader>
