@@ -265,14 +265,14 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Enhanced Hero Section */}
       <section className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Advanced gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-accent/20 to-secondary/10"></div>
+        {/* Modern gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/10"></div>
 
-        {/* Industrial pattern overlay */}
+        {/* Elegant pattern overlay */}
         <div
-          className="absolute inset-0 opacity-5"
+          className="absolute inset-0 opacity-3"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a855f7' fill-opacity='0.05'%3E%3Ccircle cx='40' cy='40' r='40'/%3E%3C/g%3E%3C/g%3E%3E/svg%3E")`,
           }}
         ></div>
 
@@ -283,20 +283,20 @@ const Home = () => {
             {/* Left side - Main content */}
             <div className="text-center lg:text-left order-2 lg:order-1">
               {/* Professional badge */}
-              <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-3 py-2 rounded-full mb-4 sm:mb-6 border border-primary/20 text-xs sm:text-sm">
+              <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4 sm:mb-6 border border-primary/30 text-xs sm:text-sm elegant-float">
                 <Package className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span className="font-semibold">Professional Anbardar</span>
               </div>
 
               {/* Main title */}
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6">
-                <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent sophisticated-pulse">
                   {warehouseman.fullName}
                 </span>
                 
               </h1>
 
-              {/* Subtitle with typing effect */}
+              {/* Subtitle with elegant styling */}
               <div className="mb-4 sm:mb-6">
                 <p className="text-lg sm:text-xl md:text-2xl font-semibold text-secondary mb-2">
                   {warehouseman.position}
@@ -310,7 +310,7 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 sm:mb-12 px-4 lg:px-0">
                 <Button
                   size="lg"
-                  className="btn-industrial text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 group w-full sm:w-auto"
+                  className="btn-elegant text-base sm:text-lg px-8 py-4 group w-full sm:w-auto"
                 >
                   <Download className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:animate-bounce" />
                   CV-ni yüklə
@@ -318,7 +318,7 @@ const Home = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all duration-300 w-full sm:w-auto"
+                  className="text-base sm:text-lg px-8 py-4 hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all duration-500 w-full sm:w-auto rounded-xl border-border/50"
                   onClick={() =>
                     document
                       .getElementById("contact")
@@ -335,9 +335,10 @@ const Home = () => {
                 {stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="text-center p-3 sm:p-4 rounded-lg bg-card/50 backdrop-blur-sm border border-border/50 hover:shadow-card transition-all duration-300"
+                    className="text-center p-4 sm:p-6 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/30 shadow-soft hover:shadow-elegant transition-all duration-500 elegant-float"
+                    style={{ animationDelay: `${index * 0.2}s` }}
                   >
-                    <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-primary mx-auto mb-2" />
+                    <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-primary mx-auto mb-3" />
                     <div className="text-lg sm:text-2xl font-bold text-foreground">
                       {stat.number}
                     </div>
@@ -361,17 +362,17 @@ const Home = () => {
               </div>
 
               {services.map((service, index) => (
-                <Card key={index} className="card-3d group cursor-pointer">
-                  <CardContent className="p-4 sm:p-6">
-                    <div className="flex items-start space-x-3 sm:space-x-4">
-                      <div className="p-2 sm:p-3 bg-primary/10 rounded-lg group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                <Card key={index} className="card-modern group cursor-pointer">
+                  <CardContent className="p-6 sm:p-8">
+                    <div className="flex items-start space-x-4 sm:space-x-6">
+                      <div className="p-3 sm:p-4 bg-primary/10 rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-soft">
                         <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-primary-foreground" />
                       </div>
                       <div>
-                        <h4 className="text-base sm:text-lg font-semibold text-foreground mb-2">
+                        <h4 className="text-base sm:text-lg font-semibold text-foreground mb-3">
                           {service.title}
                         </h4>
-                        <p className="text-muted-foreground text-xs sm:text-sm">
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                           {service.description}
                         </p>
                       </div>
@@ -381,17 +382,17 @@ const Home = () => {
               ))}
 
               {/* CTA Card */}
-              <Card className="bg-gradient-to-r from-primary to-secondary text-primary-foreground border-0 shadow-glow">
-                <CardContent className="p-4 sm:p-6 text-center">
-                  <h4 className="text-lg sm:text-xl font-bold mb-2">
+              <Card className="bg-gradient-to-r from-primary to-secondary text-primary-foreground border-0 shadow-elegant rounded-2xl sophisticated-pulse">
+                <CardContent className="p-6 sm:p-8 text-center">
+                  <h4 className="text-lg sm:text-xl font-bold mb-3">
                     Layihəniz var?
                   </h4>
-                  <p className="mb-4 opacity-90 text-sm sm:text-base">
+                  <p className="mb-6 opacity-90 text-sm sm:text-base leading-relaxed">
                     Anbar və logistika məsələlərinizdə kömək edək
                   </p>
                   <Button
                     variant="secondary"
-                    className="bg-white text-primary hover:bg-white/90"
+                    className="bg-white text-primary hover:bg-white/90 rounded-xl px-8 py-3 shadow-soft"
                     onClick={() =>
                       document
                         .getElementById("contact")
@@ -438,26 +439,26 @@ const Home = () => {
 
           {/* Proses məlumatları */}
           <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
-            <Card className="card-3d border-l-4 border-l-blue-500">
-              <CardContent className="p-4 sm:p-6 text-center">
-                <Truck className="h-10 w-10 sm:h-12 sm:w-12 text-blue-500 mx-auto mb-3" />
-                <h3 className="font-semibold text-base sm:text-lg mb-2">
+            <Card className="card-modern border-l-4 border-l-primary elegant-float">
+              <CardContent className="p-6 sm:p-8 text-center">
+                <Truck className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4" />
+                <h3 className="font-semibold text-base sm:text-lg mb-3">
                   Nəqliyyat Qəbulu
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   Müxtəlif ölçülü nəqliyyat vasitələrinin düzgün vaxtda və
                   effektiv qəbulu
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="card-3d border-l-4 border-l-green-500">
-              <CardContent className="p-4 sm:p-6 text-center">
-                <User className="h-10 w-10 sm:h-12 sm:w-12 text-green-500 mx-auto mb-3" />
-                <h3 className="font-semibold text-base sm:text-lg mb-2">
+            <Card className="card-modern border-l-4 border-l-secondary elegant-float" style={{ animationDelay: '0.2s' }}>
+              <CardContent className="p-6 sm:p-8 text-center">
+                <User className="h-10 w-10 sm:h-12 sm:w-12 text-secondary mx-auto mb-4" />
+                <h3 className="font-semibold text-base sm:text-lg mb-3">
                   İşçi Koordinasiyası
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   Təcrübəli işçi komandası ilə malların təhlükəsiz və sürətli
                   boşaldılması
                 </p>
