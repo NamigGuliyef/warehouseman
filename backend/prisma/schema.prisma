@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Warehouseman {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName        String
+  position        String?
+  email           String?
+  phone           String?
+  profBackground  String?
+  technologyFocus String?
+  experienceYears String?
+  managedProducts String?
+  solvedLogistics String?
+  efficiencyRate  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model WorkExperience {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  company     String
+  position    String
+  period      String
+  description String
+  location    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skills {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  level     String
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Certificate {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  date         String
+  organization String
+  image        String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model BlogPost {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  author      String   @default("Namiq Quliyev")
+  title       String
+  category    String
+  description String
+  readTime    String
+  image       String
+  active      Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model JobListing {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  company  String // Şirkət
+  position String // Vakansiya
+  city     String // Şəhər
+  salary   String // Maaş
+  deadline String // son tarix
+  link     String //  Linki
+  work_schedule  String //  İş qrafiki
+  priority String //  Təcili və ya adi
+  description  String //+ Təsvir
+  requirements String // + Tələblər
+  status   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+} 
