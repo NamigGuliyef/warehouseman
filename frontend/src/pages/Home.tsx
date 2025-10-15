@@ -293,7 +293,7 @@ const Home = () => {
                 <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent sophisticated-pulse">
                   {warehouseman.fullName}
                 </span>
-                
+
               </h1>
 
               {/* Subtitle with elegant styling */}
@@ -308,13 +308,20 @@ const Home = () => {
 
               {/* Action buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 sm:mb-12 px-4 lg:px-0">
-                <Button
-                  size="lg"
-                  className="btn-elegant text-base sm:text-lg px-8 py-4 group w-full sm:w-auto"
+                <a
+                  href="https://drive.google.com/uc?export=download&id=1RchZVBOxPBBO4f227vgsymouUYwEZzvN"
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <Download className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:animate-bounce" />
-                  CV-ni yüklə
-                </Button>
+                  <Button
+                    size="lg"
+                    className="btn-elegant text-base sm:text-lg px-8 py-4 group w-full sm:w-auto"
+                  >
+                    <Download className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:animate-bounce" />
+                    CV-ni yüklə
+                  </Button>
+                </a>
                 <Button
                   size="lg"
                   variant="outline"
@@ -975,26 +982,26 @@ const Home = () => {
                     </div>
                   </div>
 
-<div className="space-y-4">
-  <h3 className="text-lg sm:text-xl font-semibold">
-    Sosial şəbəkələr
-  </h3>
-  <div className="flex flex-wrap gap-2 sm:gap-4">
-    {socialLinks.map((social) => (
-      <Button
-        key={social.name}
-        variant="outline"
-        size="sm"
-        className="text-xs sm:text-sm"
-        asChild
-      >
-        <a href={social.url} target="_blank" rel="noopener noreferrer">
-          {social.name}
-        </a>
-      </Button>
-    ))}
-  </div>
-</div>
+                  <div className="space-y-4">
+                    <h3 className="text-lg sm:text-xl font-semibold">
+                      Sosial şəbəkələr
+                    </h3>
+                    <div className="flex flex-wrap gap-2 sm:gap-4">
+                      {socialLinks.map((social) => (
+                        <Button
+                          key={social.name}
+                          variant="outline"
+                          size="sm"
+                          className="text-xs sm:text-sm"
+                          asChild
+                        >
+                          <a href={social.url} target="_blank" rel="noopener noreferrer">
+                            {social.name}
+                          </a>
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
