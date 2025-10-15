@@ -206,7 +206,7 @@ export class PortfolioService {
 
   // Blogları əldə et
   async getAllBlogs() {
-    return this.prisma.blogPost.findMany({ where: { active: true }});
+    return this.prisma.blogPost.findMany();
   }
 
   // Blogu ID ilə əldə et
