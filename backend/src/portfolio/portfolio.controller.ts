@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { MulterOptions } from 'config/multer';
+import { MulterOptions } from '../../config/multer';
 import { BlogPostDTO, CertificateDTO, JobDTO, WarehousemanDTO } from './dto/create-portfolio.dto';
 import { CreateSkillDTO } from './dto/create-skill.dto';
 import { CreateWorkExperienceDTO } from './dto/create-workexperience.dto';
