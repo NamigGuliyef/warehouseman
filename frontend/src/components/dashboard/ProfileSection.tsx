@@ -41,7 +41,7 @@ const ProfileSection = ({ profile, setProfile, id }: ProfileSectionProps) => {
     !!profile.email;
 
   useEffect(() => {
-    fetch("http://localhost:3000/portfolio/dashboard/warehouseman")
+    fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/warehouseman")
       .then((res) => res.json())
       .then((data) => {
         // Əgər array-dırsa, ilkini götür
@@ -68,7 +68,7 @@ const ProfileSection = ({ profile, setProfile, id }: ProfileSectionProps) => {
   const handleCreateProfile = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/portfolio/dashboard/warehouseman", {
+      const response = await fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/warehouseman", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -108,7 +108,7 @@ const ProfileSection = ({ profile, setProfile, id }: ProfileSectionProps) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/portfolio/dashboard/warehouseman/${profile.id}`,
+        `https://warehouseman-az-back.vercel.app/portfolio/dashboard/warehouseman/${profile.id}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

@@ -43,7 +43,7 @@ const Jobs = () => {
   // Backenddən vakansiyaları gətir
   const fetchJobs = async (city?: string) => {
     setLoading(true);
-    let url = "http://localhost:3000/portfolio/dashboard/vacancies";
+    let url = "https://warehouseman-az-back.vercel.app/portfolio/dashboard/vacancies";
     if (city && city !== "") {
       url += `?city=${encodeURIComponent(city)}`;
     }

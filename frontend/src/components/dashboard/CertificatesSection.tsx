@@ -32,7 +32,7 @@ const CertificatesSection = () => {
 
   // Sertifikatları backend-dən al
   useEffect(() => {
-    fetch("http://localhost:3000/portfolio/dashboard/certificates")
+    fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/certificates")
       .then((res) => res.json())
       .then((data) => setCertificates(data || []));
   }, []);
@@ -51,7 +51,7 @@ const CertificatesSection = () => {
 
     if (editingCert) {
       // Yenilə
-      const response = await fetch(`http://localhost:3000/portfolio/dashboard/certificates/${editingCert.id}`, {
+      const response = await fetch(`https://warehouseman-az-back.vercel.app/portfolio/dashboard/certificates/${editingCert.id}`, {
         method: "PATCH",
         body: formData,
       });
@@ -61,7 +61,7 @@ const CertificatesSection = () => {
       }
     } else {
       // Əlavə et
-      const response = await fetch("http://localhost:3000/portfolio/dashboard/certificates", {
+      const response = await fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/certificates", {
         method: "POST",
         body: formData,
       });
@@ -91,7 +91,7 @@ const CertificatesSection = () => {
 
   // Sertifikatı sil
   const handleDeleteCertificate = async (id: string) => {
-    const response = await fetch(`http://localhost:3000/portfolio/dashboard/certificates/${id}`, {
+    const response = await fetch(`https://warehouseman-az-back.vercel.app/portfolio/dashboard/certificates/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {

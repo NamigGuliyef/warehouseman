@@ -40,7 +40,7 @@ const JobsSection = ({ warehousemanId }: { warehousemanId: string }) => {
 
   // Fetch jobs from API
   useEffect(() => {
-    fetch("http://localhost:3000/portfolio/dashboard/work-experience")
+    fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/work-experience")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) setJobs(data);
@@ -53,7 +53,7 @@ const JobsSection = ({ warehousemanId }: { warehousemanId: string }) => {
   const handleAddJob = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/portfolio/dashboard/work-experience", {
+      const response = await fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/work-experience", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(jobForm),
@@ -96,7 +96,7 @@ const JobsSection = ({ warehousemanId }: { warehousemanId: string }) => {
     if (!id) return;
     if (!window.confirm("Bu iş təcrübəsini silmək istədiyinizə əminsiniz?")) return;
     try {
-      const response = await fetch(`http://localhost:3000/portfolio/dashboard/work-experience/${id}`, {
+      const response = await fetch(`https://warehouseman-az-back.vercel.app/portfolio/dashboard/work-experience/${id}`, {
         method: "DELETE"
       });
       if (response.ok) {
@@ -114,7 +114,7 @@ const JobsSection = ({ warehousemanId }: { warehousemanId: string }) => {
     if (!editingJob?.id) return;
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/portfolio/dashboard/work-experience/${editingJob.id}`, {
+      const response = await fetch(`https://warehouseman-az-back.vercel.app/portfolio/dashboard/work-experience/${editingJob.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(jobForm),

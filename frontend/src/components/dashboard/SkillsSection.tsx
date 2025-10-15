@@ -22,7 +22,7 @@ const SkillsSection = () => {
 
   // Bacarıqları backend-dən al
   useEffect(() => {
-    fetch("http://localhost:3000/portfolio/dashboard/skills")
+    fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/skills")
       .then((res) => res.json())
       .then((data) => setSkills(data || []));
   }, []);
@@ -33,7 +33,7 @@ const SkillsSection = () => {
 
     if (editingSkill) {
       // Yenilə
-      const response = await fetch(`http://localhost:3000/portfolio/dashboard/skills/${editingSkill.id}`, {
+      const response = await fetch(`https://warehouseman-az-back.vercel.app/portfolio/dashboard/skills/${editingSkill.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(skillForm),
@@ -44,7 +44,7 @@ const SkillsSection = () => {
       }
     } else {
       // Əlavə et
-      const response = await fetch("http://localhost:3000/portfolio/dashboard/skills", {
+      const response = await fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/skills", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(skillForm),
@@ -68,7 +68,7 @@ const SkillsSection = () => {
 
   // Bacarığı sil
   const handleDeleteSkill = async (id: string) => {
-    const response = await fetch(`http://localhost:3000/portfolio/dashboard/skills/${id}`, {
+    const response = await fetch(`https://warehouseman-az-back.vercel.app/portfolio/dashboard/skills/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {

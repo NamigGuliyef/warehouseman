@@ -85,7 +85,7 @@ const Home = () => {
 
   useEffect(() => {
     // Fetch warehouseman profile from API
-    fetch("http://localhost:3000/portfolio/dashboard/warehouseman")
+    fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/warehouseman")
       .then((res) => res.json())
       .then((data) => {
         console.log("API-dən gələn:", data);
@@ -98,7 +98,7 @@ const Home = () => {
       .catch(() => setProfile(null));
 
     // Fetch work experiences from API
-    fetch("http://localhost:3000/portfolio/dashboard/work-experience")
+    fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/work-experience")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -110,13 +110,13 @@ const Home = () => {
       .catch(() => setWorkExperience([]));
 
     // Bacarıqları backend-dən al
-    fetch("http://localhost:3000/portfolio/dashboard/skills")
+    fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/skills")
       .then((res) => res.json())
       .then((data) => setSkills(Array.isArray(data) ? data : []))
       .catch(() => setSkills([]));
 
     // Sertifikatları backend-dən al
-    fetch("http://localhost:3000/portfolio/dashboard/certificates")
+    fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/certificates")
       .then((res) => res.json())
       .then((data) => setCertificates(Array.isArray(data) ? data : []))
       .catch(() => setCertificates([]));

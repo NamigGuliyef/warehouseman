@@ -61,7 +61,7 @@ const BlogSection = () => {
 
   // Blogları API-dən gətir
   useEffect(() => {
-    fetch("http://localhost:3000/portfolio/dashboard/blog-posts")
+    fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/blog-posts")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) setBlogs(data);
@@ -86,7 +86,7 @@ const BlogSection = () => {
         formData.append("image", blogForm.image);
       }
       const response = await fetch(
-        "http://localhost:3000/portfolio/dashboard/blog-posts",
+        "https://warehouseman-az-back.vercel.app/portfolio/dashboard/blog-posts",
         {
           method: "POST",
           body: formData,
@@ -131,7 +131,7 @@ const BlogSection = () => {
         formData.append("image", blogForm.image);
       }
       const response = await fetch(
-        `http://localhost:3000/portfolio/dashboard/blog-posts/${editingBlog.id}`,
+        `https://warehouseman-az-back.vercel.app/portfolio/dashboard/blog-posts/${editingBlog.id}`,
         {
           method: "PATCH",
           body: formData,
@@ -168,7 +168,7 @@ const BlogSection = () => {
       return;
     try {
       const response = await fetch(
-        `http://localhost:3000/portfolio/dashboard/blog-posts/${id}`,
+        `https://warehouseman-az-back.vercel.app/portfolio/dashboard/blog-posts/${id}`,
         { method: "DELETE" }
       );
       if (response.ok) {
@@ -185,7 +185,7 @@ const BlogSection = () => {
 const handleToggleActive = async (editingBlog: Blog) => {
   try {
     await fetch(
-      `http://localhost:3000/portfolio/dashboard/blog-posts/${editingBlog.id}/toggle-active`,
+      `https://warehouseman-az-back.vercel.app/portfolio/dashboard/blog-posts/${editingBlog.id}/toggle-active`,
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

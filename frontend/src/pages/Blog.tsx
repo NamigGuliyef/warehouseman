@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import BlogModal from "@/components/BlogModal";
 import AddBlogModal from "@/components/AddBlogModal";
 
-const API_URL = "http://localhost:3000/portfolio/dashboard/blog-posts"; // Backend API URL
+const API_URL = "https://warehouseman-az-back.vercel.app/portfolio/dashboard/blog-posts"; // Backend API URL
 
 const Blog = () => {
   const [selectedPost, setSelectedPost] = useState<any>(null);

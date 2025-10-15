@@ -73,7 +73,7 @@ const VacanciesSection = () => {
 
   // Vakansiyaları API-dən gətir (city query ilə)
   const fetchVacancies = async (city?: string) => {
-    let url = "http://localhost:3000/portfolio/dashboard/vacancies";
+    let url = "https://warehouseman-az-back.vercel.app/portfolio/dashboard/vacancies";
     if (city && city.trim() !== "") {
       url += `?city=${encodeURIComponent(city.trim())}`;
     }
@@ -104,7 +104,7 @@ const VacanciesSection = () => {
   const handleAddVacancy = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3000/portfolio/dashboard/vacancies",
+        "https://warehouseman-az-back.vercel.app/portfolio/dashboard/vacancies",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -162,7 +162,7 @@ const VacanciesSection = () => {
     if (!editingVacancy) return;
     try {
       const response = await fetch(
-        `http://localhost:3000/portfolio/dashboard/vacancies/${editingVacancy.id}`,
+        `https://warehouseman-az-back.vercel.app/portfolio/dashboard/vacancies/${editingVacancy.id}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -224,7 +224,7 @@ const VacanciesSection = () => {
       return;
     try {
       const response = await fetch(
-        `http://localhost:3000/portfolio/dashboard/vacancies/${id}`,
+        `https://warehouseman-az-back.vercel.app/portfolio/dashboard/vacancies/${id}`,
         { method: "DELETE" }
       );
       if (response.ok) {

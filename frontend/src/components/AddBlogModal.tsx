@@ -52,7 +52,7 @@ const AddBlogModal = () => {
         formData.append("image", blogForm.image);
       }
 
-      const res = await fetch("http://localhost:3000/portfolio/dashboard/blog-posts", {
+      const res = await fetch("https://warehouseman-az-back.vercel.app/portfolio/dashboard/blog-posts", {
         method: "POST",
         body: formData,
       });
