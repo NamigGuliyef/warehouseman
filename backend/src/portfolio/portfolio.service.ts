@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import cloudinary from 'config/cloudinary';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service'
 import {
   BlogPostDTO,
   CertificateDTO,
