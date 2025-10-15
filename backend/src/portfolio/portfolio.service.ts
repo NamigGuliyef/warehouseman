@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import cloudinary from 'config/cloudinary';
+import cloudinary from '../../config/cloudinary';
 import { PrismaService } from '../prisma/prisma.service'
 import {
   BlogPostDTO,
