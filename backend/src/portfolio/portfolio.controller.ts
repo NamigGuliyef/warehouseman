@@ -9,7 +9,6 @@ import { UpdateWarehousemanDTO } from './dto/update-portfolio.dto';
 import { UpdateSkillDTO } from './dto/update-skill.dto';
 import { UpdateWorkExperienceDTO } from './dto/update-workexperience.dto';
 import { PortfolioService } from './portfolio.service';
-import { link } from 'fs';
 
 
 @ApiTags("Portfolio")
