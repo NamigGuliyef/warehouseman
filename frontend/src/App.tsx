@@ -11,6 +11,7 @@ import Blog from "./pages/Blog";
 import Jobs from "./pages/Jobs";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import Chat from "./pages/Chat";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/jobs" element={<Jobs />} />
+              <Route path="/chat" element={<Chat />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

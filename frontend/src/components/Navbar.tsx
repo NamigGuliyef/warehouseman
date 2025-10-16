@@ -11,6 +11,7 @@ const Navbar = () => {
     { name: "Ana səhifə", href: "/" },
     { name: "Blog", href: "/blog" },
     { name: "İş Elanları", href: "/jobs" },
+    // { name: "Chat", href: "/chat" },
   ];
 
   return (

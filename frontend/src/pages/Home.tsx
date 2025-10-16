@@ -273,7 +273,7 @@ const Home = () => {
         <Hero3D />
 
         <div className="relative z-10 container mx-auto px-2 sm:px-4">
-          <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-6 lg:gap-12 items-center min-h-[90vh] sm:min-h-screen py-8 sm:py-20">
+          <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-6 lg:gap-12 items-center min-h-[90vh] sm:min-h-screen py-8 sm:py-20 pb-16">
             {/* Profil və statistika - mobil öncə */}
             <div className="w-full text-center lg:text-left order-2 lg:order-1 flex flex-col gap-6">
               {/* Badge */}
@@ -297,7 +297,7 @@ const Home = () => {
                 </p>
               </div>
               {/* Action buttons */}
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center lg:justify-start mb-4 sm:mb-8 px-2 lg:px-0">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center lg:justify-start mb-6 sm:mb-8 px-2 lg:px-0">
                 <a
                   href="https://drive.google.com/uc?export=download&id=1RchZVBOxPBBO4f227vgsymouUYwEZzvN"
                   download
@@ -328,7 +328,7 @@ const Home = () => {
                 </Button>
               </div>
               {/* Statistics */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 px-2 lg:px-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 px-2 lg:px-0">
                 {stats.map((stat, index) => (
                   <div
                     key={index}
@@ -372,94 +372,94 @@ const Home = () => {
                   </h4>
                   <Button
                     variant="secondary"
-                    className="bg-white text-primary hover:bg-white/90 rounded-xl px-6 py-2 sm:px-8 sm:py-3 shadow-soft"
-                    onClick={() =>
-                      document
-                        .getElementById("contact")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
+                    className="text-base sm:text-l px-6 py-3 w-full sm:w-auto text-white hover:text-white hover:bg-primary transition-all duration-300"
+                  onClick={(e) =>
+                    document
+                      .getElementById("contact")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
                   >
-                    İndi əlaqə saxla
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+                  İndi əlaqə saxla
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
-        {/* Scroll indicator */}
-        <div className="absolute bottom-12 sm:bottom-2 left-1/2 transform -translate-x-1/2 z-10">
-          <div className="flex flex-col items-center space-y-2 text-muted-foreground">
-            <span className="text-xs sm:text-sm">Aşağı davam edin</span>
-            <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-muted-foreground rounded-full flex justify-center">
-              <div className="w-1 h-2 sm:h-3 bg-muted-foreground rounded-full animate-bounce mt-1 sm:mt-2"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+    </div>
+        {/* Scroll indicator - moved slightly lower and non-interactive so it won't block CTA */ }
+  <div className="absolute inset-x-0 bottom-1 sm:bottom-1 flex justify-center z-10 pointer-events-none">
+    <div className="flex flex-col items-center space-y-2 text-muted-foreground">
+      <span className="text-xs sm:text-sm">Aşağı davam edin</span>
+      <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-muted-foreground rounded-full flex justify-center">
+        <div className="w-1 h-2 sm:h-3 bg-muted-foreground rounded-full animate-bounce mt-1 sm:mt-2"></div>
+      </div>
+    </div>
+  </div>
+      </section >
 
-      {/* Warehouse Animation Section */}
-      <section className="py-10 sm:py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/10 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          {/* Bölmə başlığı */}
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Professional Anbar Prosesləri
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              Real vaxt rejimində anbar əməliyyatları - nəqliyyat vasitələrinin
-              gəlişi, malların boşaldılması və rəflərə sistemli yığımı
+  {/* Warehouse Animation Section */ }
+  < section className = "py-10 sm:py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/10 relative overflow-hidden" >
+    <div className="container mx-auto px-4">
+      {/* Bölmə başlığı */}
+      <div className="text-center mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
+          Professional Anbar Prosesləri
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
+          Real vaxt rejimində anbar əməliyyatları - nəqliyyat vasitələrinin
+          gəlişi, malların boşaldılması və rəflərə sistemli yığımı
+        </p>
+      </div>
+
+      {/* Animasiyalı anbar səhnəsi */}
+      <div className="max-w-6xl mx-auto">
+        <WarehouseAnimation />
+      </div>
+
+      {/* Proses məlumatları */}
+      <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+        <Card className="card-modern border-l-4 border-l-primary elegant-float">
+          <CardContent className="p-6 sm:p-8 text-center">
+            <Truck className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4" />
+            <h3 className="font-semibold text-base sm:text-lg mb-3">
+              Nəqliyyat Qəbulu
+            </h3>
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              Müxtəlif ölçülü nəqliyyat vasitələrinin düzgün vaxtda və
+              effektiv qəbulu
             </p>
-          </div>
+          </CardContent>
+        </Card>
 
-          {/* Animasiyalı anbar səhnəsi */}
-          <div className="max-w-6xl mx-auto">
-            <WarehouseAnimation />
-          </div>
+        <Card className="card-modern border-l-4 border-l-secondary elegant-float" style={{ animationDelay: '0.2s' }}>
+          <CardContent className="p-6 sm:p-8 text-center">
+            <User className="h-10 w-10 sm:h-12 sm:w-12 text-secondary mx-auto mb-4" />
+            <h3 className="font-semibold text-base sm:text-lg mb-3">
+              İşçi Koordinasiyası
+            </h3>
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              Təcrübəli işçi komandası ilə malların təhlükəsiz və sürətli
+              boşaldılması
+            </p>
+          </CardContent>
+        </Card>
 
-          {/* Proses məlumatları */}
-          <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
-            <Card className="card-modern border-l-4 border-l-primary elegant-float">
-              <CardContent className="p-6 sm:p-8 text-center">
-                <Truck className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold text-base sm:text-lg mb-3">
-                  Nəqliyyat Qəbulu
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Müxtəlif ölçülü nəqliyyat vasitələrinin düzgün vaxtda və
-                  effektiv qəbulu
-                </p>
-              </CardContent>
-            </Card>
+        <Card className="card-3d border-l-4 border-l-orange-500">
+          <CardContent className="p-4 sm:p-6 text-center">
+            <Package className="h-10 w-10 sm:h-12 sm:w-12 text-orange-500 mx-auto mb-3" />
+            <h3 className="font-semibold text-base sm:text-lg mb-2">
+              Sistemli Saxlama
+            </h3>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Malların rəflərə düzgün yerləşdirilməsi və inventar
+              idarəetməsi
+            </p>
+          </CardContent>
+        </Card>
+      </div>
 
-            <Card className="card-modern border-l-4 border-l-secondary elegant-float" style={{ animationDelay: '0.2s' }}>
-              <CardContent className="p-6 sm:p-8 text-center">
-                <User className="h-10 w-10 sm:h-12 sm:w-12 text-secondary mx-auto mb-4" />
-                <h3 className="font-semibold text-base sm:text-lg mb-3">
-                  İşçi Koordinasiyası
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Təcrübəli işçi komandası ilə malların təhlükəsiz və sürətli
-                  boşaldılması
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="card-3d border-l-4 border-l-orange-500">
-              <CardContent className="p-4 sm:p-6 text-center">
-                <Package className="h-10 w-10 sm:h-12 sm:w-12 text-orange-500 mx-auto mb-3" />
-                <h3 className="font-semibold text-base sm:text-lg mb-2">
-                  Sistemli Saxlama
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  Malların rəflərə düzgün yerləşdirilməsi və inventar
-                  idarəetməsi
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* CTA bölməsi */}
-          {/* <div className="mt-12 sm:mt-16 text-center">
+      {/* CTA bölməsi */}
+      {/* <div className="mt-12 sm:mt-16 text-center">
             <Card className="inline-block bg-gradient-to-r from-primary to-secondary text-primary-foreground border-0 shadow-glow max-w-4xl mx-auto">
               <CardContent className="p-6 sm:p-8">
                 <h3 className="text-xl sm:text-2xl font-bold mb-3">
@@ -484,52 +484,52 @@ const Home = () => {
               </CardContent>
             </Card>
           </div> */}
-        </div>
+    </div>
 
-        {/* Dekorativ elementlər */}
+{/* Dekorativ elementlər */ }
         <div className="absolute top-10 left-10 opacity-10 hidden lg:block">
           <Package className="h-20 w-20 text-primary" />
         </div>
         <div className="absolute bottom-10 right-10 opacity-10 hidden lg:block">
           <Truck className="h-24 w-24 text-secondary" />
         </div>
-      </section>
+      </section >
 
-      {/* Navigation Menu */}
-      <section className="py-6 sm:py-8 bg-card border-b border-border sticky top-16 z-40 backdrop-blur-md">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-            {[
-              { icon: User, text: "Haqqımda", id: "about" },
-              { icon: Briefcase, text: "İş yerlərim", id: "experience" },
-              { icon: Code, text: "Bacarıqlar", id: "skills" },
-              { icon: Award, text: "Sertifikatlar", id: "certificates" },
-              { icon: Mail, text: "Əlaqə", id: "contact" },
-            ].map((item) => (
-              <Button
-                key={item.id}
-                variant="outline"
-                onClick={() =>
-                  document
-                    .getElementById(item.id)
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="flex items-center space-x-1 sm:space-x-2 hover:bg-primary hover:text-primary-foreground transition-all duration-300 text-xs sm:text-sm px-2 sm:px-4 py-2"
-              >
-                <item.icon className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="hidden sm:inline">{item.text}</span>
-                <span className="sm:hidden">{item.text.split(" ")[0]}</span>
-              </Button>
-            ))}
-          </div>
-        </div>
-      </section>
+  {/* Navigation Menu */ }
+  < section className = "py-6 sm:py-8 bg-card border-b border-border sticky top-16 z-40 backdrop-blur-md" >
+    <div className="container mx-auto px-4">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+        {[
+          { icon: User, text: "Haqqımda", id: "about" },
+          { icon: Briefcase, text: "İş yerlərim", id: "experience" },
+          { icon: Code, text: "Bacarıqlar", id: "skills" },
+          { icon: Award, text: "Sertifikatlar", id: "certificates" },
+          { icon: Mail, text: "Əlaqə", id: "contact" },
+        ].map((item) => (
+          <Button
+            key={item.id}
+            variant="outline"
+            onClick={() =>
+              document
+                .getElementById(item.id)
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="flex items-center space-x-1 sm:space-x-2 hover:bg-primary hover:text-primary-foreground transition-all duration-300 text-xs sm:text-sm px-2 sm:px-4 py-2"
+          >
+            <item.icon className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">{item.text}</span>
+            <span className="sm:hidden">{item.text.split(" ")[0]}</span>
+          </Button>
+        ))}
+      </div>
+    </div>
+      </section >
 
-      {/* About Section - Enhanced Design */}
-      <section
-        id="about"
-        className="py-20 bg-background relative overflow-hidden"
-      >
+  {/* About Section - Enhanced Design */ }
+  < section
+id = "about"
+className = "py-20 bg-background relative overflow-hidden"
+  >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5"></div>
         <div className="absolute top-20 left-20 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-20 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
@@ -644,13 +644,13 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* Work Experience - Enhanced Timeline Design */}
-      <section
-        id="experience"
-        className="py-20 bg-gradient-to-br from-accent/30 to-secondary/20 relative"
-      >
+  {/* Work Experience - Enhanced Timeline Design */ }
+  < section
+id = "experience"
+className = "py-20 bg-gradient-to-br from-accent/30 to-secondary/20 relative"
+  >
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-20 h-20 border-2 border-primary rounded-lg rotate-45"></div>
           <div className="absolute bottom-20 right-20 w-16 h-16 border-2 border-secondary rounded-full"></div>
@@ -730,13 +730,13 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* Skills Section - Modern Grid Design */}
-      <section
-        id="skills"
-        className="py-20 bg-background relative overflow-hidden"
-      >
+  {/* Skills Section - Modern Grid Design */ }
+  < section
+id = "skills"
+className = "py-20 bg-background relative overflow-hidden"
+  >
         <div className="absolute inset-0">
           <div className="absolute top-20 right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 left-20 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"></div>
@@ -805,13 +805,13 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* Certificates Section - Modern Gallery Design */}
-      <section
-        id="certificates"
-        className="py-20 bg-gradient-to-br from-secondary/10 via-accent/10 to-primary/10 relative"
-      >
+  {/* Certificates Section - Modern Gallery Design */ }
+  < section
+id = "certificates"
+className = "py-20 bg-gradient-to-br from-secondary/10 via-accent/10 to-primary/10 relative"
+  >
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-10 left-10 w-32 h-32 border-4 border-primary rounded-full"></div>
           <div className="absolute bottom-10 right-10 w-40 h-40 border-4 border-secondary rounded-lg rotate-12"></div>
@@ -915,74 +915,74 @@ const Home = () => {
             </Card>
           </div> */}
         </div>
-      </section>
+      </section >
 
-      {/* Contact Section */}
-      <section id="contact" className="py-10 sm:py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 sm:mb-16 text-foreground">
-            Əlaqə
-          </h2>
-          <div className="max-w-4xl mx-auto">
-            <Card className="card-3d">
-              <CardContent className="p-6 sm:p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-                  <div className="space-y-4 sm:space-y-6">
-                    <div className="flex items-center space-x-3 sm:space-x-4">
-                      <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
-                        <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-sm sm:text-base">
-                          Email
-                        </p>
-                        <p className="text-muted-foreground text-sm">
-                          {warehouseman.email}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3 sm:space-x-4">
-                      <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
-                        <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-sm sm:text-base">
-                          Telefon
-                        </p>
-                        <p className="text-muted-foreground text-sm">
-                          {warehouseman.phone}
-                        </p>
-                      </div>
-                    </div>
+  {/* Contact Section */ }
+  < section id = "contact" className = "py-10 sm:py-20 bg-background scroll-mt-24" >
+    <div className="container mx-auto px-4">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 sm:mb-16 text-foreground">
+        Əlaqə
+      </h2>
+      <div className="max-w-4xl mx-auto">
+        <Card className="card-3d">
+          <CardContent className="p-6 sm:p-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex items-center space-x-3 sm:space-x-4">
+                  <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
+                    <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   </div>
-
-                  <div className="space-y-4">
-                    <h3 className="text-lg sm:text-xl font-semibold">
-                      Sosial şəbəkələr
-                    </h3>
-                    <div className="flex flex-wrap gap-2 sm:gap-4">
-                      {socialLinks.map((social) => (
-                        <Button
-                          key={social.name}
-                          variant="outline"
-                          size="sm"
-                          className="text-xs sm:text-sm"
-                          asChild
-                        >
-                          <a href={social.url} target="_blank" rel="noopener noreferrer">
-                            {social.name}
-                          </a>
-                        </Button>
-                      ))}
-                    </div>
+                  <div>
+                    <p className="font-semibold text-sm sm:text-base">
+                      Email
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      {warehouseman.email}
+                    </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+                <div className="flex items-center space-x-3 sm:space-x-4">
+                  <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
+                    <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm sm:text-base">
+                      Telefon
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      {warehouseman.phone}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg sm:text-xl font-semibold">
+                  Sosial şəbəkələr
+                </h3>
+                <div className="flex flex-wrap gap-2 sm:gap-4">
+                  {socialLinks.map((social) => (
+                    <Button
+                      key={social.name}
+                      variant="outline"
+                      size="sm"
+                      className="text-xs sm:text-sm"
+                      asChild
+                    >
+                      <a href={social.url} target="_blank" rel="noopener noreferrer">
+                        {social.name}
+                      </a>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
+      </section >
+    </div >
   );
 };
 
