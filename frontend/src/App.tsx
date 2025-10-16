@@ -28,7 +28,6 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/jobs" element={<Jobs />} />
-              <Route path="/google559294291e524ce6.html" element={<div>Google Verification</div>} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="*" element={<NotFound />} />
