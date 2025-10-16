@@ -29,7 +29,7 @@ interface JobListing {
   requirements: string[] | string;
   link: string;
   createdAt: string;
-  urgent?: boolean;
+  priority?: string;
   status?: string;
 }
 
@@ -164,18 +164,21 @@ const Jobs = () => {
                       <div className="flex items-center space-x-2 flex-wrap gap-2">
                         <Badge variant="outline">{job.work_schedule}</Badge>
 
-                        {job.urgent && (
+                        {/* {job.priority && (
                           <Badge
                             variant="destructive"
                             className="warehouse-pulse"
                           >
                             Təcili
                           </Badge>
-                        )}
+                        )} */}
 
                         {/* Prioritet */}
-                        <Badge variant="secondary">
-                          Prioritet : {job.urgent ? "Yüksək" : "Normal"}
+                        <Badge
+                          variant={job.priority === "Təcili" ? "destructive" : "default"}
+                          className={job.priority === "Təcili" ? "warehouse-pulse" : ""}
+                        >
+                          {job.priority || "Adi"}
                         </Badge>
                       </div>
                       <Badge

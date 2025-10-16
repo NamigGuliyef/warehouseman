@@ -66,31 +66,38 @@ const Blog = () => {
               className={`card-3d group cursor-pointer hover:scale-105 transition-all duration-300 ${index === 0 ? 'lg:col-span-2' : ''}`}
               onClick={() => handleReadPost(post)}
             >
-              <CardHeader>
-                <div className="mb-4">
+              {/* make header padding 0 so image can touch card edges */}
+              <CardHeader className="p-0">
+                {/* image container that fills card width and has rounded top corners */}
+                <div className={`w-full overflow-hidden rounded-t-2xl`}>
                   <img
                     src={post.image || "https://via.placeholder.com/1200x800"}
                     alt={post.title}
-                    className="w-full h-48 object-cover rounded-lg shadow-card"
+                    className={`${index === 0 ? "w-full max-h-[520px] sm:max-h-[420px]" : "w-full h-60"} object-cover`}
                   />
                 </div>
-                <div className="flex items-start justify-between mb-4">
-                  <Badge variant="secondary">{post.category || "Ümumi"}</Badge>
-                  <div className="flex items-center text-sm text-muted-foreground space-x-4">
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {new Date(post.date || post.createdAt).toLocaleDateString("az-AZ")}
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {post.readTime || "5 dəq"}
+
+                {/* put header content into padded block so it aligns with card body */}
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <Badge variant="secondary">{post.category || "Ümumi"}</Badge>
+                    <div className="flex items-center text-sm text-muted-foreground space-x-4">
+                      <div className="flex items-center">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        {new Date(post.date || post.createdAt).toLocaleDateString("az-AZ")}
+                      </div>
+                      <div className="flex items-center">
+                        <Clock className="h-4 w-4 mr-1" />
+                        {post.readTime || "5 dəq"}
+                      </div>
                     </div>
                   </div>
+                  <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
+                    {post.title}
+                  </CardTitle>
                 </div>
-                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
-                  {post.title}
-                </CardTitle>
               </CardHeader>
+
               <CardContent>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2 text-sm text-muted-foreground">

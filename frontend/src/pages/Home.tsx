@@ -229,12 +229,12 @@ const Home = () => {
       label: "İdarə olunan məhsul",
       description: "Aylıq orta göstərici",
     },
-    {
-      icon: Truck,
-      number: warehouseman.solvedLogistics || "500+",
-      label: "Həll edilmiş logistik məsələ",
-      description: "Müxtəlif çətinlik səviyyəsində",
-    },
+    // {
+    //   icon: Truck,
+    //   number: warehouseman.solvedLogistics || "500+",
+    //   label: "Həll edilmiş logistik məsələ",
+    //   description: "Müxtəlif çətinlik səviyyəsində",
+    // },
     {
       icon: BarChart3,
       number: warehouseman.efficiencyRate || "95%",
@@ -246,86 +246,77 @@ const Home = () => {
   const services = [
     {
       title: "Anbar İdarəetməsi",
-      description: "Professional anbar sistemləri qurulması və optimizasiyası",
       icon: Package,
     },
     {
       title: "Logistika Planlaşdırması",
-      description: "Nəqliyyat marşrutları və daşıma proseslərinin təşkili",
       icon: Truck,
     },
     {
       title: "Inventar Nəzarəti",
-      description: "Stok idarəetməsi və inventar hesabatları sistemi",
       icon: BarChart3,
     },
   ];
 
   return (
     <div className="min-h-screen">
-      {/* Enhanced Hero Section */}
+      {/* Hero Section */}
       <section className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Modern gradient background */}
+        {/* Backgrounds */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/10"></div>
-
-        {/* Elegant pattern overlay */}
         <div
           className="absolute inset-0 opacity-3"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a855f7' fill-opacity='0.05'%3E%3Ccircle cx='40' cy='40' r='40'/%3E%3C/g%3E%3C/g%3E%3E/svg%3E")`,
           }}
         ></div>
-
         <Hero3D />
 
-        <div className="relative z-10 container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[90vh] sm:min-h-screen py-10 sm:py-20">
-            {/* Left side - Main content */}
-            <div className="text-center lg:text-left order-2 lg:order-1">
-              {/* Professional badge */}
-              <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4 sm:mb-6 border border-primary/30 text-xs sm:text-sm elegant-float">
+        <div className="relative z-10 container mx-auto px-2 sm:px-4">
+          <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-6 lg:gap-12 items-center min-h-[90vh] sm:min-h-screen py-8 sm:py-20">
+            {/* Profil və statistika - mobil öncə */}
+            <div className="w-full text-center lg:text-left order-2 lg:order-1 flex flex-col gap-6">
+              {/* Badge */}
+              <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-2 sm:mb-4 border border-primary/30 text-xs sm:text-sm">
                 <Package className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span className="font-semibold">Professional Anbardar</span>
               </div>
-
               {/* Main title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6">
-                <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent sophisticated-pulse">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 sm:mb-4">
+                <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
                   {warehouseman.fullName}
                 </span>
-
               </h1>
-
-              {/* Subtitle with elegant styling */}
-              <div className="mb-4 sm:mb-6">
-                <p className="text-lg sm:text-xl md:text-2xl font-semibold text-secondary mb-2">
+              {/* Subtitle */}
+              <div>
+                <p className="text-base sm:text-xl md:text-2xl font-semibold text-secondary mb-1">
                   {warehouseman.position}
                 </p>
-                <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed px-4 lg:px-0">
+                <p className="text-xs sm:text-base lg:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed px-2 lg:px-0">
                   {warehouseman.profBackground}
                 </p>
               </div>
-
               {/* Action buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 sm:mb-12 px-4 lg:px-0">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center lg:justify-start mb-4 sm:mb-8 px-2 lg:px-0">
                 <a
                   href="https://drive.google.com/uc?export=download&id=1RchZVBOxPBBO4f227vgsymouUYwEZzvN"
                   download
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
                 >
                   <Button
                     size="lg"
-                    className="btn-elegant text-base sm:text-lg px-8 py-4 group w-full sm:w-auto"
+                    className="btn-elegant text-base sm:text-lg px-6 py-3 w-full sm:w-auto"
                   >
-                    <Download className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:animate-bounce" />
+                    <Download className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                     CV-ni yüklə
                   </Button>
                 </a>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-base sm:text-lg px-8 py-4 hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all duration-500 w-full sm:w-auto rounded-xl border-border/50"
+                  className="text-base sm:text-lg px-6 py-3 w-full sm:w-auto hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                   onClick={() =>
                     document
                       .getElementById("contact")
@@ -336,17 +327,15 @@ const Home = () => {
                   Əlaqə saxla
                 </Button>
               </div>
-
               {/* Statistics */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 px-4 lg:px-0">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 px-2 lg:px-0">
                 {stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="text-center p-4 sm:p-6 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/30 shadow-soft hover:shadow-elegant transition-all duration-500 elegant-float"
-                    style={{ animationDelay: `${index * 0.2}s` }}
+                    className="text-center p-3 sm:p-5 rounded-2xl bg-card/80 border border-border/30 shadow-soft"
                   >
-                    <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-primary mx-auto mb-3" />
-                    <div className="text-lg sm:text-2xl font-bold text-foreground">
+                    <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-primary mx-auto mb-2" />
+                    <div className="text-base sm:text-2xl font-bold text-foreground">
                       {stat.number}
                     </div>
                     <div className="text-xs sm:text-sm font-semibold text-muted-foreground">
@@ -356,50 +345,34 @@ const Home = () => {
                 ))}
               </div>
             </div>
-
-            {/* Right side - Services cards */}
-            <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
-              <div className="text-center lg:text-left mb-6 sm:mb-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  Xidmətlərim
-                </h3>
-                <p className="text-sm sm:text-base text-muted-foreground">
-                  Professional anbar və logistika həlləri
-                </p>
+            {/* Xidmətlər və CTA */}
+            <div className="w-full space-y-3 sm:space-y-6 order-1 lg:order-2">
+              <div className="text-center lg:text-left mb-4 sm:mb-8">
+                {/* <p className="text-xs sm:text-base text-muted-foreground">
+                  Professional anbar həlləri
+                </p> */}
               </div>
-
               {services.map((service, index) => (
                 <Card key={index} className="card-modern group cursor-pointer">
-                  <CardContent className="p-6 sm:p-8">
-                    <div className="flex items-start space-x-4 sm:space-x-6">
-                      <div className="p-3 sm:p-4 bg-primary/10 rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-soft">
-                        <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-primary-foreground" />
-                      </div>
-                      <div>
-                        <h4 className="text-base sm:text-lg font-semibold text-foreground mb-3">
-                          {service.title}
-                        </h4>
-                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                          {service.description}
-                        </p>
-                      </div>
+                  <CardContent className="p-4 sm:p-8 flex items-center gap-3 sm:gap-4">
+                    <div className="p-3 sm:p-4 bg-primary/10 rounded-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-soft">
+                      <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-primary-foreground" />
                     </div>
+                    <h4 className="text-base sm:text-lg font-semibold text-foreground mb-0">
+                      {service.title}
+                    </h4>
                   </CardContent>
                 </Card>
               ))}
-
               {/* CTA Card */}
-              <Card className="bg-gradient-to-r from-primary to-secondary text-primary-foreground border-0 shadow-elegant rounded-2xl sophisticated-pulse">
-                <CardContent className="p-6 sm:p-8 text-center">
-                  <h4 className="text-lg sm:text-xl font-bold mb-3">
-                    Layihəniz var?
+              <Card className="bg-gradient-to-r from-primary to-secondary text-primary-foreground border-0 shadow-elegant rounded-2xl">
+                <CardContent className="p-4 sm:p-8 text-center">
+                  <h4 className="text-base sm:text-lg font-bold mb-2">
+                    Təkliflərinizi və yeni iş imkanlarını məmnuniyyətlə dəyərləndirirəm.
                   </h4>
-                  <p className="mb-6 opacity-90 text-sm sm:text-base leading-relaxed">
-                    Anbar və logistika məsələlərinizdə kömək edək
-                  </p>
                   <Button
                     variant="secondary"
-                    className="bg-white text-primary hover:bg-white/90 rounded-xl px-8 py-3 shadow-soft"
+                    className="bg-white text-primary hover:bg-white/90 rounded-xl px-6 py-2 sm:px-8 sm:py-3 shadow-soft"
                     onClick={() =>
                       document
                         .getElementById("contact")
@@ -413,9 +386,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-
         {/* Scroll indicator */}
-        <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="absolute bottom-12 sm:bottom-2 left-1/2 transform -translate-x-1/2 z-10">
           <div className="flex flex-col items-center space-y-2 text-muted-foreground">
             <span className="text-xs sm:text-sm">Aşağı davam edin</span>
             <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-muted-foreground rounded-full flex justify-center">
@@ -487,11 +459,11 @@ const Home = () => {
           </div>
 
           {/* CTA bölməsi */}
-          <div className="mt-12 sm:mt-16 text-center">
+          {/* <div className="mt-12 sm:mt-16 text-center">
             <Card className="inline-block bg-gradient-to-r from-primary to-secondary text-primary-foreground border-0 shadow-glow max-w-4xl mx-auto">
               <CardContent className="p-6 sm:p-8">
                 <h3 className="text-xl sm:text-2xl font-bold mb-3">
-                  Anbar proseslərinizi optimallaşdırmaq istəyirsiniz?
+                  Anbar proseslərinizi optimallaşdırmaq istəyirsini                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   z?
                 </h3>
                 <p className="text-base sm:text-lg mb-6 opacity-90">
                   {warehouseman.profBackground}
@@ -511,7 +483,7 @@ const Home = () => {
                 </Button>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
         </div>
 
         {/* Dekorativ elementlər */}
@@ -631,7 +603,7 @@ const Home = () => {
                         </span>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <div className="w-3 h-3 bg-accent rounded-full"></div>
+                        <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                         <span className="text-sm font-medium">
                           Data Analizi
                         </span>
@@ -660,8 +632,10 @@ const Home = () => {
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Layihələr</span>
-                        <span className="font-bold">50+</span>
+                        <span>İdarə olunan məhsul</span>
+                        <span className="font-bold">
+                            {warehouseman.managedProducts} 
+                        </span>
                       </div>
                     </div>
                   </CardContent>
@@ -914,7 +888,7 @@ const Home = () => {
           </div>
 
           {/* Call to action */}
-          <div className="mt-16 text-center">
+          {/* <div className="mt-16 text-center">
             <Card className="inline-block bg-gradient-to-r from-primary via-secondary to-accent text-primary-foreground border-0 shadow-2xl">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-4 flex items-center justify-center">
@@ -939,7 +913,7 @@ const Home = () => {
                 </Button>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
         </div>
       </section>
 
