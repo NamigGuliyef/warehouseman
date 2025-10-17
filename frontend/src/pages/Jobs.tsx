@@ -37,6 +37,10 @@ const Jobs = () => {
   const [jobListings, setJobListings] = useState<JobListing[]>([]);
   const [loading, setLoading] = useState(false);
 
+  // client-side pagination: əvvəlcə 6 göstər, "Daha çox" basanda 6 artır
+  const [visibleCount, setVisibleCount] = useState(6);
+  const displayedJobs = jobListings.slice(0, visibleCount);
+
   // Şəhər filteri üçün state
   const [selectedCity, setSelectedCity] = useState<string>("");
 
@@ -152,7 +156,7 @@ const Jobs = () => {
               Vakansiya tapılmadı
             </div>
           ) : (
-            jobListings.map((job) => {
+            displayedJobs.map((job) => {
               const daysLeft = getDaysLeft(job.deadline);
               return (
                 <Card
@@ -279,12 +283,13 @@ const Jobs = () => {
             variant="outline"
             size="lg"
             className="btn-industrial"
-            disabled
+            onClick={() => setVisibleCount((c) => Math.min(c + 6, jobListings.length))}
+            disabled={loading || visibleCount >= jobListings.length}
           >
             Daha çox vakansiya yüklə
           </Button>
           <p className="text-sm text-muted-foreground mt-4">
-            Cəmi {jobListings.length} vakansiya göstərilir
+            Cəmi {Math.min(jobListings.length, visibleCount)} / {jobListings.length} vakansiya göstərilir
           </p>
         </div>
       </div>
