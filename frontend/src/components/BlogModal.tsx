@@ -1,6 +1,5 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Calendar, Clock, X, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Calendar, Clock, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface BlogPost {
@@ -29,11 +28,8 @@ const BlogModal = ({ post, isOpen, onClose }: BlogModalProps) => {
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           {/* Category */}
-          <div className="flex items-center justify-between mb-2">
+          <div className="mb-2">
             <Badge variant="secondary">{post.category}</Badge>
-            <Button variant="ghost" size="sm" onClick={onClose}>
-              <X className="h-4 w-4" />
-            </Button>
           </div>
 
           {/* Title */}
