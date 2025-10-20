@@ -17,7 +17,7 @@ import { UpdateWorkExperienceDTO } from './dto/update-workexperience.dto';
 
 @Injectable()
 export class PortfolioService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async createWarehouseman(WarehousemanData: WarehousemanDTO) {
     return this.prisma.warehouseman.create({
@@ -206,7 +206,7 @@ export class PortfolioService {
 
   // Blogları əldə et
   async getAllBlogs() {
-    return this.prisma.blogPost.findMany();
+    return this.prisma.blogPost.findMany({ orderBy: { createdAt: 'desc' } });
   }
 
   // Blogu ID ilə əldə et
@@ -227,14 +227,14 @@ export class PortfolioService {
 
 
   // Vakansiya əlavə et
-  async createVacancy(jobData:JobDTO) {
+  async createVacancy(jobData: JobDTO) {
     return this.prisma.jobListing.create({
       data: jobData,
     });
   }
 
   // Vakansiya yenilə
-  async updateVacancy(id: string, jobData:JobDTO) {
+  async updateVacancy(id: string, jobData: JobDTO) {
     return this.prisma.jobListing.update({
       where: { id },
       data: jobData,
@@ -246,17 +246,17 @@ export class PortfolioService {
 
   // şəhər axtarışı ilə vakansiyaları əldə et və axtarış olmadıqda bütün vakansiyaları gətir
   async searchVacancies(city?: string) {
-    if (city) { 
+    if (city) {
       return this.prisma.jobListing.findMany({
-        where: { city} });
-    } 
-    return this.prisma.jobListing.findMany();
+        where: { city }, orderBy: { deadline: 'desc' }
+      });
+    }
+    return (await this.prisma.jobListing.findMany({ orderBy: { deadline: 'desc' } }));
   }
 
 
   // Vakansiyanı ID ilə əldə et
-  async getVacancyById(id: string)
-  {
+  async getVacancyById(id: string) {
     return this.prisma.jobListing.findUnique({
       where: { id },
     });

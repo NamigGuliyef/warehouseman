@@ -153,7 +153,7 @@ let PortfolioService = class PortfolioService {
         });
     }
     async getAllBlogs() {
-        return this.prisma.blogPost.findMany({ where: { active: true } });
+        return this.prisma.blogPost.findMany({ orderBy: { createdAt: 'desc' } });
     }
     async getBlogById(id) {
         return this.prisma.blogPost.findUnique({
@@ -179,10 +179,10 @@ let PortfolioService = class PortfolioService {
     async searchVacancies(city) {
         if (city) {
             return this.prisma.jobListing.findMany({
-                where: { city }
+                where: { city }, orderBy: { deadline: 'desc' }
             });
         }
-        return this.prisma.jobListing.findMany();
+        return (await this.prisma.jobListing.findMany({ orderBy: { deadline: 'desc' } }));
     }
     async getVacancyById(id) {
         return this.prisma.jobListing.findUnique({
